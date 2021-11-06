@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1530CBC8-2A58-4A42-9636-A2EB8B9FB4D7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Comparaison_Assermblage_MGA810</RootNamespace>
-    <AssemblyName>Comparaison_Assermblage_MGA810</AssemblyName>
+    <RootNamespace>Comparaison_Assemblage_MGA810</RootNamespace>
+    <AssemblyName>Comparaison_Assemblage_MGA810</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Part.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
