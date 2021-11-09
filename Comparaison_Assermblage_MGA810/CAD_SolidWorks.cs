@@ -14,5 +14,11 @@ namespace Comparaison_Assemblage_MGA810
         {
             return new Model();
         }
+
+        public override Model[] GetComponents(Model model) 
+        {
+            return new Model();
+        }
+
     }
 }
