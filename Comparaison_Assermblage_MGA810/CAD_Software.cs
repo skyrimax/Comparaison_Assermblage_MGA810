@@ -7,7 +7,7 @@ using System.Numerics;
 using SldWorks;
 using SwConst;
 
-namespace Comparaison_Assermblage_MGA810
+namespace Comparaison_Assemblage_MGA810
 {
     /**
      * Abstract class used to interact with a CAD software through a standardized interface
@@ -32,6 +32,8 @@ namespace Comparaison_Assermblage_MGA810
             object RefToComponent { get; set; }
             Software SoftwareUsed { get; set; }
             bool IsAssembly { get; set; }
+
+            CAD_Software CAD_Software { set; }
         }
 
         public class Model : IModel
@@ -54,6 +56,16 @@ namespace Comparaison_Assermblage_MGA810
                 set { _isAssembly = value; }
             }
 
+            public CAD_Software CAD_Software { 
+                get { return _refToSoftware; } 
+            }
+
+            CAD_Software IModel.CAD_Software
+            {
+                set { _refToSoftware = value; }
+            }
+
+            private CAD_Software _refToSoftware;
             private object _refToComponent;
             private Software _softwareUsed;
             bool _isAssembly;
@@ -74,6 +86,8 @@ namespace Comparaison_Assermblage_MGA810
         public abstract void CloseModel(Model model);
 
         public abstract Model[] GetComponents(Model model);
+
+        public abstract string[] GetConfigurations(Model model);
 
         public abstract string GetMaterial(Model model);
         public abstract double GetMass(Model model);

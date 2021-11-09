@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CAD_Software.cs" />
+    <Compile Include="CAD_SolidWorks.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
