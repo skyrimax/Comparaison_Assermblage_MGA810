@@ -20,9 +20,9 @@ namespace Comparaison_Assemblage_MGA810
             
         }
 
-        public override Model[] GetComponents(Model model) 
+        public override List<Model> GetComponents(Model model) 
         {
-            return new Model();
+            return new List<Model>();
         }              
     }
 }

@@ -85,9 +85,9 @@ namespace Comparaison_Assemblage_MGA810
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
 
-        public abstract Model[] GetComponents(Model model);
+        public abstract List<Model> GetComponents(Model model);
 
-        public abstract string[] GetConfigurations(Model model);
+        public abstract List<Model> GetConfigurations(Model model);
 
         public abstract string GetMaterial(Model model);
         public abstract double GetMass(Model model);
@@ -103,7 +103,7 @@ namespace Comparaison_Assemblage_MGA810
         public abstract System.Numerics.Matrix4x4 GetInertiaTensorAtCM(Model model);
         public abstract System.Numerics.Matrix4x4 GetInertiaTensorAtFOR(Model model);
 
-        public abstract object[] GetConstraints(Model model);
+        public abstract List<object> GetConstraints(Model model);
 
         public abstract KeyValuePair<string, string> GetCustomProperties(Model model);
     }
