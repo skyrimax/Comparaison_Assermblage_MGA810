@@ -27,11 +27,12 @@ namespace Comparaison_Assemblage_MGA810
 
         }
 
-        private interface IModel
+        protected interface IModel
         {
             object RefToComponent { get; set; }
             Software SoftwareUsed { get; set; }
             bool IsAssembly { get; set; }
+            string Path { get; set; }
 
             CAD_Software CAD_Software { set; }
         }
@@ -56,6 +57,12 @@ namespace Comparaison_Assemblage_MGA810
                 set { _isAssembly = value; }
             }
 
+            string IModel.Path
+            {
+                get { return _pathToFile; }
+                set { _pathToFile = value; }
+            }
+
             public CAD_Software CAD_Software { 
                 get { return _refToSoftware; } 
             }
@@ -68,7 +75,8 @@ namespace Comparaison_Assemblage_MGA810
             private CAD_Software _refToSoftware;
             private object _refToComponent;
             private Software _softwareUsed;
-            bool _isAssembly;
+            private bool _isAssembly;
+            private string _pathToFile;
         }
 
         protected enum Software

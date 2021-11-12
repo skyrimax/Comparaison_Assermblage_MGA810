@@ -4,20 +4,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
 namespace Comparaison_Assemblage_MGA810
 {
     class CAD_SolidWorks : CAD_Software
     {
         public override Model OpenFile(string path)
         {
-            return new Model();
+            Model openedModel = default(Model);
+            SldWorks.DocumentSpecification documentSpecification = default(SldWorks.DocumentSpecification);
+            string extension = default(string);
+
+            if(!System.IO.File.Exists(path))
+            {
+                throw new ArgumentException("Parameter is not a valid path", nameof(path));
+            }
+
+            openedModel = new Model();
+            extension = System.IO.Path.GetExtension(path);
+            documentSpecification = (SldWorks.DocumentSpecification)swApp.GetOpenDocSpec(path);
+
+            switch (extension)
+            {
+                // Assemblages Solidworks
+                case ".asm": case ".sldasm":
+                    ((IModel)openedModel).IsAssembly = true;
+
+                    break;
+                // Parts solidworks
+                case ".prt": case ".sldprt":
+                    ((IModel)openedModel).IsAssembly = false;
+
+                    break;
+                default:
+                    throw new ArgumentException("Parameter is not a valid file type", nameof(path));
+            }
+
+            ((IModel)openedModel).CAD_Software = this;
+            ((IModel)openedModel).SoftwareUsed = Software.SolidWorks;
+            ((IModel)openedModel).Path = path;
+
+            if(!swApp.SetSearchFolders((int) SwConst.swSearchFolderTypes_e.swDocumentType,
+                System.IO.Path.GetDirectoryName(path)))
+            {
+                throw new ArgumentException("Unable to set search folder", nameof(path));
+            }
+
+            ((IModel)openedModel).RefToComponent = swApp.OpenDoc7(documentSpecification);
+
+            return openedModel;
         }
 
         public override void CloseModel(Model model)
         {
-
+            swApp.CloseDoc(((IModel)model).Path);
         }
 
 
@@ -105,5 +144,7 @@ namespace Comparaison_Assemblage_MGA810
         {
             return new KeyValuePair<string, string>();
         }
+
+        private SldWorks.SldWorks swApp;
     }
 }
