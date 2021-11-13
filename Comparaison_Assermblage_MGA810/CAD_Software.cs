@@ -94,6 +94,7 @@ namespace Comparaison_Assemblage_MGA810
         public abstract void CloseModel(Model model);
 
         public abstract List<Model> GetComponents(Model model);
+        public abstract int GetNbComponents(Model model);
 
         public abstract List<Model> GetConfigurations(Model model);
 

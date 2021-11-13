@@ -62,7 +62,52 @@ namespace Comparaison_Assemblage_MGA810
 
         public override List<Model> GetComponents(Model model)
         {
-            return new List<Model>();
+            string path = default(string);
+            string extension = default(string);
+            Model component = default(Model);
+
+            if (!((IModel)model).IsAssembly)
+            {
+                throw new ArgumentException("Parameter is not an assembly", nameof(model));
+            }
+
+            int nbComponents = GetNbComponents(model);
+
+            List<Model> components = new List<Model>(nbComponents);
+
+            object[] swComponents = (object[])((SldWorks.AssemblyDoc)((IModel)model).RefToComponent).GetComponents(false);
+
+            foreach(SldWorks.Component2 swComponent in (SldWorks.Component2[])swComponents)
+            {
+                path = swComponent.GetPathName();
+                extension = System.IO.Path.GetExtension(path);
+                if(!(extension == ".sldprt" || extension == ".prt") || swComponent.IsSuppressed())
+                {
+                    break;
+                }
+
+                component = new Model();
+
+                ((IModel)component).CAD_Software = this;
+                ((IModel)component).IsAssembly = false;
+                ((IModel)component).Path = path;
+                ((IModel)component).RefToComponent = swComponent.GetModelDoc2();
+                ((IModel)component).SoftwareUsed = Software.SolidWorks;
+
+                components.Add(component);
+            }
+
+            return components;
+        }
+
+        public override int GetNbComponents(Model model)
+        {
+            if (!((IModel)model).IsAssembly)
+            {
+                throw new ArgumentException("Parameter is not an assembly", nameof(model));
+            }
+
+            return ((SldWorks.AssemblyDoc)((IModel)model).RefToComponent).GetComponentCount(false);
         }
 
 
