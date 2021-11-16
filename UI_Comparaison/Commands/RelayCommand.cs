@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CrystalReportWpfApplication1.ViewModels.Commands
+namespace UI_Comparaison.Commands
 {
 
     public class RelayCommand : ICommand
