@@ -8,7 +8,7 @@ namespace Comparaison_Assemblage_MGA810
 {
     class CAD_SolidWorks : CAD_Software
     {
-        public override Model OpenFile(string path)
+        protected override Model OpenFile(string path)
         {
             Model openedModel = default(Model);
             SldWorks.DocumentSpecification documentSpecification = default(SldWorks.DocumentSpecification);
@@ -54,13 +54,13 @@ namespace Comparaison_Assemblage_MGA810
             return openedModel;
         }
 
-        public override void CloseModel(Model model)
+        protected override void CloseModel(Model model)
         {
             swApp.CloseDoc(((IModel)model).Path);
         }
 
 
-        public override List<Model> GetComponents(Model model)
+        protected override List<Model> GetComponents(Model model)
         {
             string path = default(string);
             string extension = default(string);
@@ -100,7 +100,7 @@ namespace Comparaison_Assemblage_MGA810
             return components;
         }
 
-        public override int GetNbComponents(Model model)
+        protected override int GetNbComponents(Model model)
         {
             if (!((IModel)model).IsAssembly)
             {
@@ -111,81 +111,81 @@ namespace Comparaison_Assemblage_MGA810
         }
 
 
-        public override List<Model> GetConfigurations(Model model)
+        protected override List<Model> GetConfigurations(Model model)
         {
             return new List<Model>();
         }
 
 
-        public override string GetMaterial(Model model)
+        protected override string GetMaterial(Model model)
         {
             return "";
         }
 
-        public override double GetMass(Model model)
+        protected override double GetMass(Model model)
         {
             return 0.0;
         }
 
-        public override double GetVolume(Model model)
+        protected override double GetVolume(Model model)
         {
             return 0.0;
         }
 
-        public override double GetSurfaceArea(Model model)
+        protected override double GetSurfaceArea(Model model)
         {
             return 0.0;
         }
 
-        public override int GetNbFaces(Model model)
+        protected override int GetNbFaces(Model model)
         {
             return 0;
         }
 
-        public override int GetNbEdges(Model model)
+        protected override int GetNbEdges(Model model)
         {
             return 0;
         }
 
-        public override string GetColors(Model model)
+        protected override string GetColors(Model model)
         {
             return "";
         }
 
 
-        public override System.Numerics.Vector3 GetCenterOfMass(Model model)
+        protected override System.Numerics.Vector3 GetCenterOfMass(Model model)
         {
             return new System.Numerics.Vector3();
         }
 
-        public override System.Numerics.Matrix4x4 GetPrincipalAxes(Model model)
+        protected override System.Numerics.Matrix4x4 GetPrincipalAxes(Model model)
         {
             return new System.Numerics.Matrix4x4();
         }
 
-        public override System.Numerics.Vector3 GetInertia(Model model)
+        protected override System.Numerics.Vector3 GetInertia(Model model)
         {
             return new System.Numerics.Vector3();
         }
 
-        public override System.Numerics.Matrix4x4 GetInertiaTensorAtCM(Model model)
+        protected override System.Numerics.Matrix4x4 GetInertiaTensorAtCM(Model model)
         {
             return new System.Numerics.Matrix4x4();
         }
 
-        public override System.Numerics.Matrix4x4 GetInertiaTensorAtFOR(Model model)
+        protected override System.Numerics.Matrix4x4 GetInertiaTensorAtFOR(Model model)
         {
             return new System.Numerics.Matrix4x4();
         }
 
 
-        public override List<object> GetConstraints(Model model)
+        protected override List<object> GetConstraints(Model model)
         {
             return new List<object>();
         }
 
 
-        public override KeyValuePair<string, string> GetCustomProperties(Model model)
+        protected override KeyValuePair<string, string> GetCustomProperties(Model model)
         {
             return new KeyValuePair<string, string>();
         }
