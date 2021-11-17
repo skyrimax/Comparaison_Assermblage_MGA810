@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using UI_Comparaison.Commands;
 
+
 namespace UI_Comparaison
 {
     /// <summary>
@@ -24,9 +25,13 @@ namespace UI_Comparaison
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
+    
+
         /// <summary>
         /// Répertoires qui contiennent les chemins d'accès des assemblages
         /// </summary>
+
+        
 
         public string Assembly_1_Directory { get; set; }
 
@@ -72,8 +77,7 @@ namespace UI_Comparaison
         {
             InitializeComponent();
             DataContext = this;
-            Assembly_2_Directory = "Allô";
-            
+  
         }
 
        

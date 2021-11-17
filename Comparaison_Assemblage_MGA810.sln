@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comparaison_Assermblage_MGA810", "Comparaison_Assermblage_MGA810\Comparaison_Assermblage_MGA810.csproj", "{1530CBC8-2A58-4A42-9636-A2EB8B9FB4D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comparaison_Assemblage_MGA810", "Comparaison_Assermblage_MGA810\Comparaison_Assemblage_MGA810.csproj", "{1530CBC8-2A58-4A42-9636-A2EB8B9FB4D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_Comparaison", "UI_Comparaison\UI_Comparaison.csproj", "{9C4D992A-D6EE-4C64-94EF-95A9EA76CE27}"
 EndProject
