@@ -15,7 +15,7 @@ namespace Comparaison_Assemblage_MGA810
      * 
      * 
      **/
-    abstract class CAD_Software
+    public abstract class CAD_Software
     {
         public CAD_Software()
         {
