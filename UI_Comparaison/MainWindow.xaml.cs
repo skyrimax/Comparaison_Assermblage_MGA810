@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Comparaison_Assemblage_MGA810;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,20 +27,36 @@ namespace UI_Comparaison
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
-    
+
 
         /// <summary>
         /// Répertoires qui contiennent les chemins d'accès des assemblages
         /// </summary>
 
-        
+
 
         //public string Assembly_1_Directory { get; set; }
 
-        // CAD_Software
+        private CAD_Software DriverAssembly1;
+        private CAD_Software DriverAssembly2;
 
 
-       
+        private string _assembly_1_Directory;
+
+        public string Assembly_1_Directory
+        {
+            get
+            {
+                return _assembly_1_Directory;
+            }
+            set
+            {
+                this._assembly_1_Directory = value;
+                OnPropertyChanged(nameof(this.Assembly_1_Directory));
+            }
+
+        }
+
 
 
         private string _assembly_2_Directory;
@@ -107,20 +124,19 @@ namespace UI_Comparaison
             switch (parameter.ToString()) {
 
                 case "Assembly_1_Directory":
-                    //if() assy 2 et solidworks
-                   // _assembly_1_Directory = openFileDialog1.FileName;
-                    //CAD_Software DriverAssembly2 = new CAD_SolidWorks();
+                    Assembly_1_Directory = openFileDialog1.FileName;
+                    DriverAssembly1 = new CAD_SolidWorks();
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
                 
                     break;
 
                 case "Assembly_2_Directory":
-                    //if() assy 1 et solidworks
-                    _assembly_2_Directory = openFileDialog1.FileName;
-                    //CAD_Software DriverAssembly2 = new CAD_SolidWorks();
+                    Assembly_2_Directory = openFileDialog1.FileName;
+                    DriverAssembly2 = new CAD_SolidWorks();
                     IsAssemblyDirectory2Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
+            
                     break;
             
             }
@@ -147,10 +163,6 @@ namespace UI_Comparaison
         {
             InitializeComponent();
             DataContext = this;
-           // Assembly_2_Directory = "TEST";
-            IsAssemblyDirectory2Found = true;
-
-
         }
 
         // Ouvrir et créer CAD_Solidworks 

@@ -74,7 +74,7 @@
                                 
                                 
                             </TextBox>
-                            <TextBox Margin="2 2 2 2"  Grid.Column="0" Grid.Row="1" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                            <TextBox Foreground="Black" Margin="2 2 2 2"  Grid.Column="0" Grid.Row="1" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center"></Button>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="1" Content="..." VerticalContentAlignment="Center"></Button>
