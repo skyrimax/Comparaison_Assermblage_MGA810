@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using UI_Comparaison.Commands;
-
+//using Comparaison_Assemblage_MGA810;
 
 namespace UI_Comparaison
 {
@@ -33,10 +34,15 @@ namespace UI_Comparaison
 
         
 
-        public string Assembly_1_Directory { get; set; }
+        //public string Assembly_1_Directory { get; set; }
+
+        // CAD_Software
 
 
-        private string _assembly_2_Directory { get; set; }
+       
+
+
+        private string _assembly_2_Directory;
 
         public string Assembly_2_Directory { 
             get 
@@ -50,14 +56,78 @@ namespace UI_Comparaison
             }
 
         }
+        public bool IsAssemblyDirectory1Found { get; set; }
+
+        public bool IsAssemblyDirectory2Found { get; set; }
 
 
         /// <summary>
         /// Commande pour sauvegarer en CSV
         /// </summary>
-        public RelayCommand Save { get; set; }
+     
+
+        private RelayCommand _getAssemblyDirectoryCommand;
+        public ICommand GetAssemblyDirectoryCommand
+        {
+            get
+            {
+                if (_getAssemblyDirectoryCommand == null)
+                {
+                    _getAssemblyDirectoryCommand = new RelayCommand(param => this.GetAssemblyDirectory(param)
+                        );
+                }
+                return _getAssemblyDirectoryCommand;
+            }
+        }
+
+        public void GetAssemblyDirectory(object parameter)
+        {
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            {
+
+                Title = "Rechercher les fichiers CSV",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "csv",
+                Filter = "CSV files (*.csv)|*.csv",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
 
 
+            openFileDialog1.ShowDialog();
+                     
+
+            switch (parameter.ToString()) {
+
+                case "Assembly_1_Directory":
+                    //if() assy 2 et solidworks
+                   // _assembly_1_Directory = openFileDialog1.FileName;
+                    //CAD_Software DriverAssembly2 = new CAD_SolidWorks();
+                    IsAssemblyDirectory1Found = true;
+                    OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
+                
+                    break;
+
+                case "Assembly_2_Directory":
+                    //if() assy 1 et solidworks
+                    _assembly_2_Directory = openFileDialog1.FileName;
+                    //CAD_Software DriverAssembly2 = new CAD_SolidWorks();
+                    IsAssemblyDirectory2Found = true;
+                    OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
+                    break;
+            
+            }
+                
+
+
+        }
 
         /// <summary>
         /// Implantation de la méthode de l'interface INotifyPropertyChanged
@@ -77,9 +147,33 @@ namespace UI_Comparaison
         {
             InitializeComponent();
             DataContext = this;
-  
+           // Assembly_2_Directory = "TEST";
+            IsAssemblyDirectory2Found = true;
+
+
         }
 
-       
+        // Ouvrir et créer CAD_Solidworks 
+        // (CAD_Solidworks)
+
+
+
+        /*
+         * Valider extension
+         * Si .sldasm ou .asm, extensier CAD_SolidWorks
+         * Ouvrir fichier avec Cad_SolidWorks
+         * Vérifier extension 2
+         * Si même que assemblage 1,
+         * Réutiliser Cad_SolidWorks
+         * Enumeration Software (pas démarrer 2 fois sld, réutiliser la même si même que 1 SOlidWorks)
+         *
+         * Construit  objet Assembly à partir de model retourner par Driver (x 2) 
+         * Ouvrir les fichiers sur SolidWorks
+         * Comparer les deux assembly
+         * Retourner les résultats
+         */
+        // Fonction Comparer
+        // Valider extension
+
     }
 }
