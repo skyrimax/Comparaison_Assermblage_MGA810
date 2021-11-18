@@ -249,8 +249,8 @@ namespace Comparaison_Assemblage_MGA810
             SolidWorks,
         }
 
-        protected abstract Model OpenFile(string path);
-        protected abstract void CloseModel(Model model);
+        public abstract Model OpenFile(string path);
+        public abstract void CloseModel(Model model);
 
         protected abstract List<Model> GetComponents(Model model);
         protected abstract int GetNbComponents(Model model);
