@@ -109,7 +109,7 @@ namespace UI_Comparaison
                 CheckPathExists = true,
 
                 DefaultExt = "csv",
-                Filter = "CSV files (*.csv)|*.csv",
+                Filter = "SLDASM files (*.SLDASM)|*.SLDASM",
                 FilterIndex = 2,
                 RestoreDirectory = true,
 
@@ -126,6 +126,7 @@ namespace UI_Comparaison
                 case "Assembly_1_Directory":
                     Assembly_1_Directory = openFileDialog1.FileName;
                     DriverAssembly1 = new CAD_SolidWorks();
+                    DriverAssembly1.OpenFile(Assembly_1_Directory);
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
                 
