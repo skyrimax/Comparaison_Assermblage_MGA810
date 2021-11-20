@@ -126,7 +126,7 @@ namespace UI_Comparaison
                 case "Assembly_1_Directory":
                     Assembly_1_Directory = openFileDialog1.FileName;
                     DriverAssembly1 = new CAD_SolidWorks();
-                    DriverAssembly1.OpenFile(Assembly_1_Directory);
+                   // DriverAssembly1.OpenFile(Assembly_1_Directory);
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
                 
