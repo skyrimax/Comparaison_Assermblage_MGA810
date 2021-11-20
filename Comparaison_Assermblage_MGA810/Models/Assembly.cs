@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Comparaison_Assemblage_MGA810.CAD_Software;
 
-namespace Comparaison_Assermblage_MGA810.Models
+namespace Comparaison_Assemblage_MGA810.Models
 {
-    public class Assembly
+    internal class Assembly 
     {
-        /// <summary>
-        /// Classe qui contient toutes les propriétés de pièces à comparer entre deux assemblages.
-        /// </summary>
 
-        public string AssemblyName { get; set; }
+        private int _numberOfComponents { get; set; }
 
-        public List<Part>  { get; set; }
+        public Assembly(Model Assembly)
+        {
+            _numberOfComponents = Assembly.GetNbComponents(Assembly);
+        }
+    }
 }
-}
-

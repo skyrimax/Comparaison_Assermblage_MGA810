@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Comparaison_Assemblage_MGA810.CAD_Software;
 
 namespace Comparaison_Assemblage_MGA810
 {
@@ -18,8 +19,8 @@ namespace Comparaison_Assemblage_MGA810
 
         public string Color { get; set; }
 
-        public Part(CAD_SolidWorks.Model Model){
-           
+        public Part(Model Model){
+            Mass = Model.GetMass(Model);
         }
 
 }
