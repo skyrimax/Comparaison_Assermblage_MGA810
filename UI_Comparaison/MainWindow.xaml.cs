@@ -126,7 +126,7 @@ namespace UI_Comparaison
                 case "Assembly_1_Directory":
                     Assembly_1_Directory = openFileDialog1.FileName;
                     DriverAssembly1 = new CAD_SolidWorks();
-                   // DriverAssembly1.OpenFile(Assembly_1_Directory);
+                    DriverAssembly1.OpenFile(Assembly_1_Directory);
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
                 
@@ -181,6 +181,7 @@ namespace UI_Comparaison
          * Enumeration Software (pas démarrer 2 fois sld, réutiliser la même si même que 1 SOlidWorks)
          *
          * Construit  objet Assembly à partir de model retourner par Driver (x 2) 
+         * Assemblage1 = new Assembly(Model)
          * Ouvrir les fichiers sur SolidWorks
          * Comparer les deux assembly
          * Retourner les résultats

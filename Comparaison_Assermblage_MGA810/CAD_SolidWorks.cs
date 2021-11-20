@@ -42,7 +42,7 @@ namespace Comparaison_Assemblage_MGA810
             switch (extension)
             {
                 // Assemblages Solidworks
-                case ".asm": case ".sldasm":
+                case ".ASM": case ".SLDASM":
                     ((IModel)openedModel).IsAssembly = true;
 
                     break;

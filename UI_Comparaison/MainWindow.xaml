@@ -156,9 +156,25 @@
                     </StackPanel>
                 </GroupBox>
 
+                    <GroupBox Header="Vérification préliminaire" Grid.Row="4" Grid.RowSpan="10" Grid.ColumnSpan="6">
+                        <StackPanel>
+                            <TextBlock Text="Comparaison du moment (horodaté) de sauvegarde et du nombre de pièces provenant des métadonnées de l'assemblage."></TextBlock>
+                            
+                            <Label Content="Moment de sauvegarde" Background="Green"></Label>
+                            <Label Content="Nombre de pièces" Background="Green"></Label>
+                            <Label Content="Moment de sauvegarde" Background="Green"></Label>
+                            <!--<DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Critère"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Valeur"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                                
+                            </DataGrid>-->
+                        </StackPanel>
+                    </GroupBox>
 
 
-    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Header="Résultats de la comparaison">
                 <DataGrid>
