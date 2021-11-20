@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Comparaison_Assemblage_MGA810
 {
-    class CAD_SolidWorks : CAD_Software
+    public class CAD_SolidWorks : CAD_Software
     {
-        protected override Model OpenFile(string path)
+        public override Model OpenFile(string path)
         {
             Model openedModel = default(Model);
             SldWorks.DocumentSpecification documentSpecification = default(SldWorks.DocumentSpecification);
@@ -54,7 +54,7 @@ namespace Comparaison_Assemblage_MGA810
             return openedModel;
         }
 
-        protected override void CloseModel(Model model)
+        public override void CloseModel(Model model)
         {
             swApp.CloseDoc(((IModel)model).Path);
         }

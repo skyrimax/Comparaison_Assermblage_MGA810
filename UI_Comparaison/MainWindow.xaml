@@ -56,11 +56,28 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <TextBox Margin="2 2 2 2" Background="LightGray"  Grid.Column="0" Grid.Row="0" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                            <TextBox Margin="2 2 2 2"  Grid.Column="0" Grid.Row="1" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                            <TextBox Margin="2,2,2,2.6"   Grid.Column="0" Grid.Row="0" Text="{Binding Assembly_1_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.Style>
 
-                            <Button Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center"></Button>
-                            <Button Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="1" Content="..." VerticalContentAlignment="Center"></Button>
+                                    <Style TargetType="TextBox">
+                                      
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsAssemblyDirectory1Found}" Value="True">
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="Background" Value="Green" />
+                                            </DataTrigger>
+                                            
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </TextBox.Style>
+                                
+                                
+                            </TextBox>
+                            <TextBox Foreground="Black" Margin="2 2 2 2"  Grid.Column="0" Grid.Row="1" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                            <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center"></Button>
+                            <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="1" Content="..." VerticalContentAlignment="Center"></Button>
                         </Grid>
 
 
