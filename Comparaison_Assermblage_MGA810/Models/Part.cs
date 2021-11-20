@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Comparaison_Assermblage_MGA810.Models
+namespace Comparaison_Assemblage_MGA810
 {
     public class Part
     {
@@ -18,7 +18,9 @@ namespace Comparaison_Assermblage_MGA810.Models
 
         public string Color { get; set; }
 
-
+        public Part(CAD_SolidWorks.Model Model){
+           
+        }
 
 }
 }
