@@ -8,6 +8,22 @@ namespace Comparaison_Assemblage_MGA810
 {
     public class CAD_SolidWorks : CAD_Software
     {
+        public CAD_SolidWorks()
+        {
+            try
+            {
+                swApp = new SldWorks.SldWorks();
+                if (swApp == null)
+                {
+                    throw new InvalidOperationException("Unable to connect to SolidWorks");
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         public override Model OpenFile(string path)
         {
             Model openedModel = default(Model);
