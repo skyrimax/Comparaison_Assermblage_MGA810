@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Comparaison_Assemblage_MGA810.Models;
 
 using UI_Comparaison.Commands;
 //using Comparaison_Assemblage_MGA810;
@@ -40,6 +41,7 @@ namespace UI_Comparaison
         private CAD_Software DriverAssembly1;
         private CAD_Software DriverAssembly2;
 
+        private Assembly _assembly1;
 
         private string _assembly_1_Directory;
 
@@ -126,7 +128,14 @@ namespace UI_Comparaison
                 case "Assembly_1_Directory":
                     Assembly_1_Directory = openFileDialog1.FileName;
                     DriverAssembly1 = new CAD_SolidWorks();
-                    DriverAssembly1.OpenFile(Assembly_1_Directory);
+
+
+                    //var theClass = new TheClass(() => TheMethod());
+
+                    //_assembly1 = new Assembly(DriverAssembly1.OpenFile(Assembly_1_Directory));
+
+                    
+
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
                 

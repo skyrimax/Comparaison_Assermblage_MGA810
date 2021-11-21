@@ -176,6 +176,12 @@
 
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Lecture des fichiers">
+               
+            </TabItem>
+
+
             <TabItem Header="Résultats de la comparaison">
                 <DataGrid>
                     <DataGrid.Columns >
