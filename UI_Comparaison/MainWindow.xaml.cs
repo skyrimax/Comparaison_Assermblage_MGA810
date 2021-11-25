@@ -38,10 +38,48 @@ namespace UI_Comparaison
 
         //public string Assembly_1_Directory { get; set; }
 
+        public List<string> Configurations { get; set; }
+
         private CAD_Software DriverAssembly1;
         private CAD_Software DriverAssembly2;
 
         private Assembly _assembly1;
+
+        public Assembly Assembly1
+        {
+            get
+            {
+                return _assembly1;
+            }
+            set
+            {
+                _assembly1 = value;
+                OnPropertyChanged(nameof(Assembly1));
+            }
+
+        }
+
+
+
+
+
+
+        private Assembly _assembly2;
+
+        public Assembly Assembly2
+        {
+            get
+            {
+                return _assembly2;
+            }
+            set
+            {
+                _assembly2 = value;
+                OnPropertyChanged(nameof(Assembly2));
+            }
+
+        }
+
 
         private string _assembly_1_Directory;
 
@@ -80,10 +118,27 @@ namespace UI_Comparaison
         public bool IsAssemblyDirectory2Found { get; set; }
 
 
+        public string _assemblyReadResults;
+  
+
+
+        public string AssemblyReadResults
+        {
+            get
+            {
+                return _assemblyReadResults;
+            }
+            set
+            {
+                _assemblyReadResults = value;
+                OnPropertyChanged(nameof(AssemblyReadResults));
+            }
+        }
+
         /// <summary>
         /// Commande pour sauvegarer en CSV
         /// </summary>
-     
+
 
         private RelayCommand _getAssemblyDirectoryCommand;
         public ICommand GetAssemblyDirectoryCommand
@@ -127,26 +182,12 @@ namespace UI_Comparaison
 
                 case "Assembly_1_Directory":
                     Assembly_1_Directory = openFileDialog1.FileName;
-                    DriverAssembly1 = new CAD_SolidWorks();
-
-
-                    //var theClass = new TheClass(() => TheMethod());
-
-                    //_assembly1 = new Assembly(DriverAssembly1.OpenFile(Assembly_1_Directory));
-
-                    
-
-                    IsAssemblyDirectory1Found = true;
-                    OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
-                
+                                 
                     break;
 
                 case "Assembly_2_Directory":
                     Assembly_2_Directory = openFileDialog1.FileName;
-                    DriverAssembly2 = new CAD_SolidWorks();
-                    IsAssemblyDirectory2Found = true;
-                    OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
-            
+                   
                     break;
             
             }
@@ -154,6 +195,104 @@ namespace UI_Comparaison
 
 
         }
+
+        private RelayCommand _openAssembly1Command;
+        public ICommand OpenAssembly1Command
+        {
+            get
+            {
+                if (_openAssembly1Command == null)
+                {
+                
+                    _openAssembly1Command = new RelayCommand(param => this.OpenAssembly(param), param => Assembly_1_Directory != null
+                        );
+                }
+                return _openAssembly1Command;
+            }
+        }
+
+
+        private RelayCommand _openAssembly2Command;
+        public ICommand OpenAssembly2Command
+        {
+            get
+            {
+                if (_openAssembly2Command == null)
+                {
+
+                    _openAssembly2Command = new RelayCommand(param => this.OpenAssembly(param), param => Assembly_2_Directory != null
+                        );
+                }
+                return _openAssembly2Command;
+            }
+        }
+
+
+        public void OpenAssembly(object parameter)
+        {
+            switch (parameter.ToString())
+            {
+
+                case "Assembly_1_Directory":
+           
+                    DriverAssembly1 = new CAD_SolidWorks();
+
+
+                    //var theClass = new TheClass(() => TheMethod());
+
+                    Assembly1 = new Assembly(DriverAssembly1.OpenFile(Assembly_1_Directory));
+
+                    AssemblyReadResults += _assembly1.ToString();
+
+                    IsAssemblyDirectory1Found = true;
+                    OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
+
+                    break;
+
+                case "Assembly_2_Directory":
+        
+                    DriverAssembly2 = new CAD_SolidWorks();
+
+                    Assembly2 = new Assembly(DriverAssembly2.OpenFile(Assembly_2_Directory));
+
+                    IsAssemblyDirectory2Found = true;
+                    OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
+
+                    break;
+
+            }
+
+
+
+        }
+
+
+        private RelayCommand _deleteAssemblyDirectoryCommand;
+        public ICommand DeleteAssemblyDirectoryCommand
+        {
+            get
+            {
+                if (_deleteAssemblyDirectoryCommand == null)
+                {
+                    _deleteAssemblyDirectoryCommand = new RelayCommand(param => this.DeleteAssemblyDirectory(param)
+                        );
+                }
+                return _deleteAssemblyDirectoryCommand;
+            }
+        }
+
+        public void DeleteAssemblyDirectory(object parameter)
+        {
+
+            Assembly_1_Directory = string.Empty;
+            IsAssemblyDirectory1Found = false;
+            OnPropertyChanged("IsAssemblyDirectory1Found");
+       
+            Assembly_2_Directory = string.Empty;
+            IsAssemblyDirectory2Found = false;
+            OnPropertyChanged("IsAssemblyDirectory2Found");
+        }
+
 
         /// <summary>
         /// Implantation de la méthode de l'interface INotifyPropertyChanged

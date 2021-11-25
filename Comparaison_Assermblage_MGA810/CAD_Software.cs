@@ -81,6 +81,12 @@ namespace Comparaison_Assemblage_MGA810
 
                 return model._refToSoftware.GetComponents(model);
             }
+
+
+         
+
+
+
             public int GetNbComponents(Model model)
             {
                 if (!model._isAssembly)
@@ -238,6 +244,7 @@ namespace Comparaison_Assemblage_MGA810
             private string _pathToFile;
         }
 
+      
         protected enum Software
         {
             Autodesk_Inventor,
@@ -251,6 +258,8 @@ namespace Comparaison_Assemblage_MGA810
 
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
+
+
 
         protected abstract List<Model> GetComponents(Model model);
         protected abstract int GetNbComponents(Model model);

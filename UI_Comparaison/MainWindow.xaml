@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_Comparaison"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
         <TabControl>
 
@@ -24,7 +24,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
                         <RowDefinition/>
                         <RowDefinition/>
 
@@ -43,14 +43,17 @@
 
 
                     <!--</GroupBox>-->
-                    <GroupBox Header="Répertoires" Grid.ColumnSpan="6">
+                    <GroupBox Header="Répertoires"  Grid.ColumnSpan="6">
+                
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition  />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
+                                <RowDefinition MinHeight="20"  />
+                                <RowDefinition MinHeight="20" />
+                                <RowDefinition MinHeight="20" />
+                                <RowDefinition MinHeight="20" />
+                                <RowDefinition MinHeight="20" />
+                                <RowDefinition MinHeight="30" />
+                                </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="12*"/>
@@ -80,18 +83,57 @@
                                 <TextBlock>Configurations :</TextBlock>
                                 <ComboBox Margin="10 0 0 0"></ComboBox>
                             </StackPanel>
-                            <TextBox Foreground="Black" Margin="2 2 2 2"  Grid.Column="0" Grid.Row="2" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                            <TextBox Margin="2 2 2 2"  Grid.Column="0" Grid.Row="2" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.Style>
+
+                                    <Style TargetType="TextBox">
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsAssemblyDirectory2Found}" Value="True">
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="Background" Value="Green" />
+                                            </DataTrigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </TextBox.Style>
+
+
+                            </TextBox>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <TextBlock>Configurations :</TextBlock>
                                 <ComboBox Margin="10 0 0 0"></ComboBox>
                             </StackPanel>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center"></Button>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"></Button>
-                        </Grid>
+                          
+                                    <Grid Grid.Row="5" Background="AliceBlue">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
 
+                                        </Grid.RowDefinitions>
 
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition  />
+                                            <ColumnDefinition  />
 
+                                            <ColumnDefinition  />
+                                            <ColumnDefinition  />
 
+                                        </Grid.ColumnDefinitions>
+                                <Button  Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"></Button>
+                                <Button  Command="{Binding OpenAssembly1Command}"  CommandParameter="Assembly_1_Directory" Grid.Row="0" Grid.Column="0" Margin="2 2 2 2">Ouvrir Assemblage 1</Button>
+                                <Button  Grid.Row="0" Grid.Column="1" Command="{Binding OpenAssembly2Command}"  CommandParameter="Assembly_2_Directory" Margin="2 2 2 2">Ouvrir Assemblage 2</Button>
+                                <Button Command="{Binding DeleteAssemblyDirectoryCommand}"   Grid.Row="0" Grid.Column="2" Margin="2 2 2 2">Supprimer</Button>
+                                <Button  Grid.Row="0" Grid.Column="3" Margin="2 2 2 2">Vérif. préliminaire</Button>
+                            </Grid>
+                          
+                            </Grid>
+
+                            
+                       
+                   
                     </GroupBox>
 
                     <GroupBox Header="Entrées et choix de filtrage" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="3">
@@ -131,7 +173,7 @@
                                 <TextBlock  Margin="10 0 0 0" Text="Volume"></TextBlock>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
                                 <CheckBox></CheckBox>
                                 <TextBlock  Margin="10 0 0 0" Text="Aire de surface"></TextBlock>
                             </StackPanel>
@@ -141,12 +183,10 @@
                                 <CheckBox></CheckBox>
                                 <TextBlock  Margin="10 0 0 0" Text="Centre de masse"></TextBlock>
                             </StackPanel>
-
                   
-                
 
 
-                </Grid>
+                        </Grid>
                     
                     </GroupBox>
 
@@ -178,12 +218,12 @@
             </TabItem>
 
             <TabItem Header="Lecture des fichiers">
-               
+                <TextBlock Text="{Binding AssemblyReadResults, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </TabItem>
 
 
             <TabItem Header="Résultats de la comparaison">
-                <DataGrid>
+                <DataGrid ItemsSource="{Binding Assembly1}">
                     <DataGrid.Columns >
                         <DataGridTextColumn Header="Propriétés"></DataGridTextColumn>
                         <DataGridTextColumn Header="Assemblage 1"></DataGridTextColumn>

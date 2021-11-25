@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SwConst;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -93,11 +94,11 @@ namespace Comparaison_Assemblage_MGA810
 
             object[] swComponents = (object[])((SldWorks.AssemblyDoc)((IModel)model).RefToComponent).GetComponents(false);
 
-            foreach(SldWorks.Component2 swComponent in (SldWorks.Component2[])swComponents)
+            foreach(SldWorks.Component2 swComponent in swComponents)
             {
                 path = swComponent.GetPathName();
                 extension = System.IO.Path.GetExtension(path);
-                if(!(extension == ".sldprt" || extension == ".prt") || swComponent.IsSuppressed())
+                if(!(extension == ".SLDPRT" || extension == ".PRT") || swComponent.IsSuppressed())
                 {
                     break;
                 }
@@ -107,7 +108,7 @@ namespace Comparaison_Assemblage_MGA810
                 ((IModel)component).CAD_Software = this;
                 ((IModel)component).IsAssembly = false;
                 ((IModel)component).Path = path;
-                ((IModel)component).RefToComponent = swComponent.GetModelDoc2();
+                ((IModel)component).RefToComponent = swComponent.GetModelDoc2(); 
                 ((IModel)component).SoftwareUsed = Software.SolidWorks;
 
                 components.Add(component);
@@ -115,6 +116,9 @@ namespace Comparaison_Assemblage_MGA810
 
             return components;
         }
+
+
+
 
         protected override int GetNbComponents(Model model)
         {
@@ -135,7 +139,9 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override string GetMaterial(Model model)
         {
-            return "";
+
+
+            return ((SldWorks.Component2)((IModel)model).RefToComponent).GetMaterialIdName();
         }
 
         protected override double GetMass(Model model)
@@ -145,7 +151,8 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override double GetVolume(Model model)
         {
-            return 0.0;
+
+            return ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetMassProperties(0)[3];
         }
 
         protected override double GetSurfaceArea(Model model)
