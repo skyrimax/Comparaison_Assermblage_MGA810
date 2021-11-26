@@ -72,169 +72,165 @@ namespace Comparaison_Assemblage_MGA810
                 set { _refToSoftware = value; }
             }
 
-            public List<Model> GetComponents(Model model)
+            public List<Model> GetComponents()
             {
-                if (!model._isAssembly)
+                if (!_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an assembly", nameof(model));
+                    throw new ArgumentException("Object is not an assembly", _pathToFile);
                 }
 
-                return model._refToSoftware.GetComponents(model);
+                return _refToSoftware.GetComponents(this);
             }
 
 
-         
-
-
-
-            public int GetNbComponents(Model model)
+            public int GetNbComponents()
             {
-                if (!model._isAssembly)
+                if (!_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an assembly", nameof(model));
+                    throw new ArgumentException("Parameter is not an assembly", _pathToFile);
                 }
 
-                return model._refToSoftware.GetNbComponents(model);
+                return _refToSoftware.GetNbComponents(this);
             }
 
-            public List<Model> GetConfigurations(Model model)
+            public List<Model> GetConfigurations()
             {
-                if (!model._isAssembly)
+                if (!_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an assembly", nameof(model));
+                    throw new ArgumentException("Parameter is not an assembly", _pathToFile);
                 }
 
-                return model._refToSoftware.GetConfigurations(model);
+                return _refToSoftware.GetConfigurations(this);
             }
 
-            public string GetMaterial(Model model)
+            public string GetMaterial()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetMaterial(model);
+                return _refToSoftware.GetMaterial(this);
             }
-            public double GetMass(Model model)
+            public double GetMass()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetMass(model);
+                return _refToSoftware.GetMass(this);
             }
-            public double GetVolume(Model model)
+            public double GetVolume()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetVolume(model);
+                return _refToSoftware.GetVolume(this);
             }
-            public double GetSurfaceArea(Model model)
+            public double GetSurfaceArea()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetSurfaceArea(model);
+                return _refToSoftware.GetSurfaceArea(this);
             }
-            public int GetNbFaces(Model model)
+            public int GetNbFaces()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetNbFaces(model);
+                return _refToSoftware.GetNbFaces(this);
             }
-            public int GetNbEdges(Model model)
+            public int GetNbEdges()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetNbEdges(model);
+                return _refToSoftware.GetNbEdges(this);
             }
-            public string GetColors(Model model)
+            public string GetColors()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetColors(model);
-            }
-
-            public System.Numerics.Vector3 GetCenterOfMass(Model model)
-            {
-                if (model._isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
-                }
-
-                return model._refToSoftware.GetCenterOfMass(model);
-            }
-            public System.Numerics.Matrix4x4 GetPrincipalAxes(Model model)
-            {
-                if (model._isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
-                }
-
-                return model._refToSoftware.GetPrincipalAxes(model);
-            }
-            public System.Numerics.Vector3 GetInertia(Model model)
-            {
-                if (model._isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
-                }
-
-                return model._refToSoftware.GetInertia(model);
-            }
-            public System.Numerics.Matrix4x4 GetInertiaTensorAtCM(Model model)
-            {
-                if (model._isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
-                }
-
-                return model._refToSoftware.GetInertiaTensorAtCM(model);
-            }
-            public System.Numerics.Matrix4x4 GetInertiaTensorAtFOR(Model model)
-            {
-                if (model._isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
-                }
-
-                return model._refToSoftware.GetInertiaTensorAtFOR(model);
+                return _refToSoftware.GetColors(this);
             }
 
-            public List<object> GetConstraints(Model model)
+            public System.Numerics.Vector3 GetCenterOfMass()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetConstraints(model);
+                return _refToSoftware.GetCenterOfMass(this);
+            }
+            public System.Numerics.Matrix4x4 GetPrincipalAxes()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetPrincipalAxes(this);
+            }
+            public System.Numerics.Vector3 GetInertia()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetInertia(this);
+            }
+            public System.Numerics.Matrix4x4 GetInertiaTensorAtCM()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetInertiaTensorAtCM(this);
+            }
+            public System.Numerics.Matrix4x4 GetInertiaTensorAtFOR()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetInertiaTensorAtFOR(this);
             }
 
-            public KeyValuePair<string, string> GetCustomProperties(Model model)
+            public List<object> GetConstraints()
             {
-                if (model._isAssembly)
+                if (_isAssembly)
                 {
-                    throw new ArgumentException("Parameter is not an part", nameof(model));
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
                 }
 
-                return model._refToSoftware.GetCustomProperties(model);
+                return _refToSoftware.GetConstraints(this);
+            }
+
+            public KeyValuePair<string, string> GetCustomProperties()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetCustomProperties(this);
             }
 
             private CAD_Software _refToSoftware;
@@ -258,8 +254,6 @@ namespace Comparaison_Assemblage_MGA810
 
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
-
-
 
         protected abstract List<Model> GetComponents(Model model);
         protected abstract int GetNbComponents(Model model);

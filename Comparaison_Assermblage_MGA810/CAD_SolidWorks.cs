@@ -117,9 +117,6 @@ namespace Comparaison_Assemblage_MGA810
             return components;
         }
 
-
-
-
         protected override int GetNbComponents(Model model)
         {
             if (!((IModel)model).IsAssembly)
