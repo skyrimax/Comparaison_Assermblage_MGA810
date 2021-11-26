@@ -27,7 +27,7 @@ namespace Comparaison_Assemblage_MGA810
         public Part(Model Model)
         {
             PartName = String.Empty;
-            Volume = Model.GetVolume(Model);
+            Volume = Model.GetVolume();
         }
 
     }
