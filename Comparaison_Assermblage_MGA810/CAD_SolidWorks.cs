@@ -78,6 +78,12 @@ namespace Comparaison_Assemblage_MGA810
         }
 
 
+        protected override System.DateTime GetSaveDateTime()
+        {
+            return new System.DateTime();
+        }
+
+
         protected override List<Model> GetComponents(Model model)
         {
             string path = default(string);
