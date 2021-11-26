@@ -158,7 +158,8 @@ namespace Comparaison_Assemblage_MGA810
         }
 
         protected override int GetNbFaces(Model model)
-        {
+        {// TEST: FONCTION À AJOUTER SUR 
+
             return 0;
         }
 
