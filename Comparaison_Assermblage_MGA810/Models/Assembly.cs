@@ -17,8 +17,8 @@ namespace Comparaison_Assemblage_MGA810.Models
 
         public Assembly(Model Assembly)
         {
-            _numberOfComponents = Assembly.GetNbComponents(Assembly);
-            _modelList = Assembly.GetComponents(Assembly);
+            _numberOfComponents = Assembly.GetNbComponents();
+            _modelList = Assembly.GetComponents();
 
             _partList = new List<Part>();
 

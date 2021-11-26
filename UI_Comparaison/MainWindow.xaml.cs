@@ -101,13 +101,14 @@ namespace UI_Comparaison
 
         private string _assembly_2_Directory;
 
-        public string Assembly_2_Directory { 
-            get 
-            { 
-                return _assembly_2_Directory; 
+        public string Assembly_2_Directory
+        {
+            get
+            {
+                return _assembly_2_Directory;
             }
             set
-            { 
+            {
                 this._assembly_2_Directory = value;
                 OnPropertyChanged(nameof(this.Assembly_2_Directory));
             }
@@ -119,7 +120,7 @@ namespace UI_Comparaison
 
 
         public string _assemblyReadResults;
-  
+
 
 
         public string AssemblyReadResults
@@ -176,22 +177,30 @@ namespace UI_Comparaison
 
 
             openFileDialog1.ShowDialog();
-                     
 
-            switch (parameter.ToString()) {
+
+            switch (parameter.ToString())
+            {
 
                 case "Assembly_1_Directory":
-                    Assembly_1_Directory = openFileDialog1.FileName;
-                                 
+                    if (openFileDialog1.FileName != "")
+                    {
+                        Assembly_1_Directory = openFileDialog1.FileName;
+                    }
+
+
                     break;
 
                 case "Assembly_2_Directory":
-                    Assembly_2_Directory = openFileDialog1.FileName;
-                   
+                    if (openFileDialog1.FileName != "")
+                    {
+                        Assembly_2_Directory = openFileDialog1.FileName;
+                    }
+
                     break;
-            
+
             }
-                
+
 
 
         }
@@ -203,7 +212,7 @@ namespace UI_Comparaison
             {
                 if (_openAssembly1Command == null)
                 {
-                
+
                     _openAssembly1Command = new RelayCommand(param => this.OpenAssembly(param), param => Assembly_1_Directory != null
                         );
                 }
@@ -234,7 +243,7 @@ namespace UI_Comparaison
             {
 
                 case "Assembly_1_Directory":
-           
+
                     DriverAssembly1 = new CAD_SolidWorks();
 
 
@@ -250,7 +259,7 @@ namespace UI_Comparaison
                     break;
 
                 case "Assembly_2_Directory":
-        
+
                     DriverAssembly2 = new CAD_SolidWorks();
 
                     Assembly2 = new Assembly(DriverAssembly2.OpenFile(Assembly_2_Directory));
@@ -284,11 +293,11 @@ namespace UI_Comparaison
         public void DeleteAssemblyDirectory(object parameter)
         {
 
-            Assembly_1_Directory = string.Empty;
+            Assembly_1_Directory = null;
             IsAssemblyDirectory1Found = false;
             OnPropertyChanged("IsAssemblyDirectory1Found");
-       
-            Assembly_2_Directory = string.Empty;
+
+            Assembly_2_Directory = null;
             IsAssemblyDirectory2Found = false;
             OnPropertyChanged("IsAssemblyDirectory2Found");
         }
@@ -302,7 +311,7 @@ namespace UI_Comparaison
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-          
+
         }
 
         /// <summary>
@@ -339,3 +348,4 @@ namespace UI_Comparaison
 
     }
 }
+
