@@ -10,10 +10,10 @@ namespace Comparaison_Assemblage_MGA810.Models
     public class Assembly
     {
 
-        private int _numberOfComponents { get; set; }
-        public List<Part> _partList { get; set; }
+        private int _numberOfComponents { get; }
+        public List<Part> _partList { get; }
 
-        private List<Model> _modelList { get; set; }
+        private List<Model> _modelList { get;  }
 
         public Assembly(Model Assembly)
         {
@@ -34,7 +34,9 @@ namespace Comparaison_Assemblage_MGA810.Models
 
             int padding = 50;
 
-            string header = "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) + "\n" + "------------------------------------------------------------------------------------------------------------------------"+ "\n";
+            string header = "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) 
+                + "\n" + "------------------------------------------------------------------------------------------------------------------------"
+                + "\n";
 
 
 
