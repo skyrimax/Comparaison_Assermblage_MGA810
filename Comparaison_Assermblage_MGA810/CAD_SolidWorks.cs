@@ -1,4 +1,5 @@
 ﻿using SwConst;
+using SldWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,13 +155,30 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override double GetSurfaceArea(Model model)
         {
-            return 0.0;
+            Object[] faces;
+            Surface swSurface;
+            double PartSurfaceArea = 0.0;
+
+            faces = ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetFaces();
+            
+            foreach (var face in faces)
+            {
+                swSurface = (Surface)((Face2)face).GetSurface();
+                if (swSurface.IsPlane())
+                {
+                    PartSurfaceArea += ((Face2)face).GetArea();
+                }
+            }
+            return PartSurfaceArea;
         }
 
         protected override int GetNbFaces(Model model)
-        {// TEST: FONCTION À AJOUTER SUR 
+        {
+            int Nbfaces;
 
-            return 0;
+            Nbfaces = ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetFaceCount();
+           
+            return Nbfaces;
         }
 
         protected override int GetNbEdges(Model model)
