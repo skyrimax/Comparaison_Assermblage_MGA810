@@ -123,11 +123,11 @@
                                             <ColumnDefinition  />
 
                                         </Grid.ColumnDefinitions>
-                                <Button  Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"></Button>
-                                <Button  Command="{Binding OpenAssembly1Command}"  CommandParameter="Assembly_1_Directory" Grid.Row="0" Grid.Column="0" Margin="2 2 2 2">Ouvrir Assemblage 1</Button>
-                                <Button  Grid.Row="0" Grid.Column="1" Command="{Binding OpenAssembly2Command}"  CommandParameter="Assembly_2_Directory" Margin="2 2 2 2">Ouvrir Assemblage 2</Button>
-                                <Button Command="{Binding DeleteAssemblyDirectoryCommand}"   Grid.Row="0" Grid.Column="2" Margin="2 2 2 2">Supprimer</Button>
-                                <Button  Grid.Row="0" Grid.Column="3" Margin="2 2 2 2">Vérif. préliminaire</Button>
+                 
+                                <Button MaxHeight="30"  Command="{Binding OpenAssembly1Command}"  CommandParameter="Assembly_1_Directory" Grid.Row="0" Grid.Column="0" Margin="2 2 2 2">Ouvrir Assemblage 1</Button>
+                                <Button MaxHeight="30"  Grid.Row="0" Grid.Column="1" Command="{Binding OpenAssembly2Command}"  CommandParameter="Assembly_2_Directory" Margin="2 2 2 2">Ouvrir Assemblage 2</Button>
+                                <Button MaxHeight="30" Command="{Binding DeleteAssemblyDirectoryCommand}"   Grid.Row="0" Grid.Column="2" Margin="2 2 2 2">Supprimer</Button>
+                                <Button MaxHeight="30"  Grid.Row="0" Grid.Column="3" Margin="2 2 2 2">Vérif. préliminaire</Button>
                             </Grid>
                           
                             </Grid>
@@ -231,7 +231,10 @@
             </TabItem>
 
             <TabItem Header="Lecture des fichiers">
-                <Label Content="{Binding AssemblyReadResults, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas"></Label>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                    <Label Content="{Binding AssemblyReadResults, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" ScrollViewer.CanContentScroll="True"></Label>
+                </ScrollViewer>
+                
             </TabItem>
 
 
