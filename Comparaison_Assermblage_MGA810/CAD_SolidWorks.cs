@@ -100,7 +100,7 @@ namespace Comparaison_Assemblage_MGA810
                 extension = System.IO.Path.GetExtension(path);
                 if(!(extension == ".SLDPRT" || extension == ".PRT") || swComponent.IsSuppressed())
                 {
-                    break;
+                    continue;
                 }
 
                 component = new Model();
@@ -127,6 +127,12 @@ namespace Comparaison_Assemblage_MGA810
             return ((SldWorks.AssemblyDoc)((IModel)model).RefToComponent).GetComponentCount(false);
         }
 
+        protected override DateTime GetSaveDateTime(Model model)
+        {
+            var SolidworksSaveTime = ((SldWorks.ModelDoc2)(((IModel)model).RefToComponent)).get_SummaryInfo((int)swSummInfoField_e.swSumInfoSaveDate);
+            var AssemblySaveTime = DateTime.Parse(SolidworksSaveTime);
+            return AssemblySaveTime;
+        }
 
         protected override List<string> GetConfigurations(Model model)
         {
@@ -175,6 +181,16 @@ namespace Comparaison_Assemblage_MGA810
             return "";
         }
 
+        protected override string GetPartName(Model model)
+        {
+            string path = ((IModel)model).Path;
+
+            string name = path.Split('\\').Last();
+
+
+
+            return name;
+        }
 
         protected override System.Numerics.Vector3 GetCenterOfMass(Model model)
         {

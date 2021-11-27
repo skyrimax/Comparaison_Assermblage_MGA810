@@ -72,6 +72,11 @@ namespace Comparaison_Assemblage_MGA810
                 set { _refToSoftware = value; }
             }
 
+            public System.DateTime GetSaveDateTime()
+            {
+                return _refToSoftware.GetSaveDateTime(this);
+            }
+
             public List<Model> GetComponents()
             {
                 if (!_isAssembly)
@@ -167,6 +172,17 @@ namespace Comparaison_Assemblage_MGA810
                 return _refToSoftware.GetColors(this);
             }
 
+
+            public string GetPartName()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetPartName(this);
+            }
+
             public System.Numerics.Vector3 GetCenterOfMass()
             {
                 if (_isAssembly)
@@ -255,7 +271,10 @@ namespace Comparaison_Assemblage_MGA810
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
 
+        protected abstract System.DateTime GetSaveDateTime(Model model);
         protected abstract List<Model> GetComponents(Model model);
+
+        protected abstract string GetPartName(Model model);
         protected abstract int GetNbComponents(Model model);
 
         protected abstract List<string> GetConfigurations(Model model);

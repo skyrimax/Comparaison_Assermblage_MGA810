@@ -284,14 +284,16 @@ namespace UI_Comparaison
 
                     Assembly1 = new Assembly(DriverAssembly1.OpenFile(Assembly_1_Directory));
 
+
                     AssemblyReadResults += _assembly1.ToString();
 
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
 
                     Configurations1 = Assembly1.ConfigurationList;
-                   // Configurations1.Add("Allô");
+                    // Configurations1.Add("Allô");
                     //Configurations1.Add("Ça va");
+ 
 
                     break;
 

@@ -24,19 +24,41 @@ namespace Comparaison_Assemblage_MGA810
 
         public double Volume { get;  }
 
+        public double SurfaceArea { get; }
+
+        public int NbFaces { get; }
+
+        public int NbEdges { get; }
+
+        public System.Numerics.Vector3 CenterOfMass { get; }
+
+        public System.Numerics.Matrix4x4 PrincipalAxes { get; }
+
+        public System.Numerics.Vector3 Inertia { get; }
+
+        public System.Numerics.Matrix4x4 InertiaTensorAtCM { get; }
+
+        public System.Numerics.Matrix4x4 InertiaTensorAtFOR { get; }
+
         public Part(Model Model)
         {
-            // 
-            PartName = String.Empty;
+            PartName = Model.GetPartName();
             Volume = Model.GetVolume();
             Material = Model.GetMaterial();
-        }
+            Mass = Model.GetMass();
+            Volume = Model.GetVolume();
+            SurfaceArea = Model.GetSurfaceArea();
+            NbFaces = Model.GetNbFaces();
+            NbEdges = Model.GetNbEdges();
+            Color = Model.GetColors();
+            CenterOfMass = Model.GetCenterOfMass();
+            PrincipalAxes = Model.GetPrincipalAxes();
+            Inertia = Model.GetInertia();
+            InertiaTensorAtCM = Model.GetInertiaTensorAtCM();
+            InertiaTensorAtFOR = Model.GetInertiaTensorAtFOR();
+    }
 
 
-        private string GetPartName(Model Model)
-        {
-           
-            return null;
-        }
+
     }
 }

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_Comparaison"
         mc:Ignorable="d"
-        Title="Démonstration MGA810 | Comparateur d'assemblages" Height="600" Width="900">
+        Title="Démonstration MGA810 | Comparateur d'assemblages" Height="800" Width="1000">
     <Grid>
         <TabControl>
 
 
-            <TabItem Header="Entrées">
+            <TabItem Header="Entrées" ScrollViewer.CanContentScroll="true">
 
                 <Grid>
 
@@ -28,6 +28,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
 
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -52,7 +53,7 @@
                                 <RowDefinition MinHeight="20" />
                                 <RowDefinition MinHeight="20" />
                                 <RowDefinition MinHeight="20" />
-                                <RowDefinition MinHeight="30" />
+                   
                                 </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -61,7 +62,7 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <TextBox Margin="2,2,2,2.6"   Grid.Column="0" Grid.Row="0" Text="{Binding Assembly_1_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox Margin="2,2,2,2.6" MaxHeight="20"  Grid.Column="0" Grid.Row="0" Text="{Binding Assembly_1_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.Style>
 
                                     <Style TargetType="TextBox">
@@ -80,10 +81,10 @@
                                 
                             </TextBox>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock>Configurations :</TextBlock>
-                                <ComboBox Margin="10 0 0 0" ItemsSource="{Binding Configurations1}"></ComboBox>
+                                <TextBlock VerticalAlignment="Center">Configurations :</TextBlock>
+                                <ComboBox Margin="10 0 0 0" MaxHeight="25" Width="100"  ItemsSource="{Binding Configurations1}"></ComboBox>
                             </StackPanel>
-                            <TextBox Margin="2 2 2 2"  Grid.Column="0" Grid.Row="2" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox Margin="2 2 2 2" MaxHeight="20" Grid.Column="0" Grid.Row="2"  Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.Style>
 
                                     <Style TargetType="TextBox">
@@ -102,8 +103,8 @@
 
                             </TextBox>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                                <TextBlock>Configurations :</TextBlock>
-                                <ComboBox Margin="10 0 0 0" ItemsSource="{Binding Configurations2}"></ComboBox>
+                                <TextBlock VerticalAlignment="Center">Configurations :</TextBlock>
+                                <ComboBox Margin="10 0 0 0" ItemsSource="{Binding Configurations2}" MaxHeight="25" Width="100" ></ComboBox>
                             </StackPanel>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center" MaxHeight="20"></Button>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"  MaxHeight="20"></Button>
@@ -139,13 +140,13 @@
                     <GroupBox Header="Entrées et choix de filtrage" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="3">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition MaxHeight="30"/>
+                                <RowDefinition  MaxHeight="30"/>
+                                <RowDefinition  MaxHeight="30"/>
 
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition  MaxHeight="30"/>
+                 
+               
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -190,19 +191,31 @@
                     
                     </GroupBox>
 
-                    <GroupBox Header="Autres options" Grid.Row="3" Grid.ColumnSpan="6">
-                    <StackPanel>
-                        <TextBlock Text="Les autres options avant de passer à la comparaison seront présentées ici."></TextBlock>
+                    <GroupBox Header="Autres options" Grid.Row="3" Grid.ColumnSpan="6" >
+                    <StackPanel  MaxHeight="30">
+                            <TextBlock  MaxHeight="30" Text="Les autres options avant de passer à la comparaison seront présentées ici."></TextBlock>
                     </StackPanel>
                 </GroupBox>
 
-                    <GroupBox Header="Vérification préliminaire" Grid.Row="4" Grid.RowSpan="10" Grid.ColumnSpan="6">
+                    <GroupBox Header="Vérification préliminaire" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="6">
                         <StackPanel>
                             <TextBlock Text="Comparaison du moment (horodaté) de sauvegarde et du nombre de pièces provenant des métadonnées de l'assemblage."></TextBlock>
                             
                             <Label Content="Moment de sauvegarde" Background="Green"></Label>
                             <Label Content="Nombre de pièces" Background="Green"></Label>
-                            <Label Content="Moment de sauvegarde" Background="Green"></Label>
+                      
+                            <!--<DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Critère"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Valeur"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                                
+                            </DataGrid>-->
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Comparaison détaillée" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="6" Margin="0 20 0 0">
+                        <StackPanel>
+                            <Button>Lancer la comparaison</Button>
                             <!--<DataGrid>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Critère"></DataGridTextColumn>
@@ -213,12 +226,12 @@
                         </StackPanel>
                     </GroupBox>
 
-
                 </Grid>
+             
             </TabItem>
 
             <TabItem Header="Lecture des fichiers">
-                <TextBlock Text="{Binding AssemblyReadResults, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <Label Content="{Binding AssemblyReadResults, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas"></Label>
             </TabItem>
 
 
