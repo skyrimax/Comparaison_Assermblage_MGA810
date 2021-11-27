@@ -81,7 +81,7 @@
                             </TextBox>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock>Configurations :</TextBlock>
-                                <ComboBox Margin="10 0 0 0"></ComboBox>
+                                <ComboBox Margin="10 0 0 0" ItemsSource="{Binding Configurations1}"></ComboBox>
                             </StackPanel>
                             <TextBox Margin="2 2 2 2"  Grid.Column="0" Grid.Row="2" Text="{Binding Assembly_2_Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.Style>

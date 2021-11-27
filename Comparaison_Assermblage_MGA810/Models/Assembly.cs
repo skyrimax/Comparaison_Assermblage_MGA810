@@ -13,12 +13,15 @@ namespace Comparaison_Assemblage_MGA810.Models
         private int _numberOfComponents { get; set; }
         public List<Part> _partList { get; set; }
 
+        public List<string> ConfigurationList { get; set; }
         private List<Model> _modelList { get; set; }
 
         public Assembly(Model Assembly)
         {
             _numberOfComponents = Assembly.GetNbComponents();
             _modelList = Assembly.GetComponents();
+
+            ConfigurationList = Assembly.GetConfigurations();
 
             _partList = new List<Part>();
 

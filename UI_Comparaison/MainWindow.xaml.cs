@@ -38,7 +38,24 @@ namespace UI_Comparaison
 
         //public string Assembly_1_Directory { get; set; }
 
-        public List<string> Configurations { get; set; }
+      
+
+        private List<string> _configurations1;
+
+        public List<string> Configurations1
+        {
+            get
+            {
+                return _configurations1;
+            }
+            set
+            {
+                _configurations1 = value;
+                OnPropertyChanged(nameof(Configurations1));
+            }
+
+        }
+
 
         private CAD_Software DriverAssembly1;
         private CAD_Software DriverAssembly2;
@@ -255,6 +272,10 @@ namespace UI_Comparaison
 
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
+
+                    Configurations1 = Assembly1.ConfigurationList;
+                   // Configurations1.Add("Allô");
+                    //Configurations1.Add("Ça va");
 
                     break;
 

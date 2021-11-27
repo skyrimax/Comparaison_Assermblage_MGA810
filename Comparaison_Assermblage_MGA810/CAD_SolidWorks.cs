@@ -128,9 +128,12 @@ namespace Comparaison_Assemblage_MGA810
         }
 
 
-        protected override List<Model> GetConfigurations(Model model)
+        protected override List<string> GetConfigurations(Model model)
         {
-            return new List<Model>();
+            string[] configurationsArray = (string[])(((SldWorks.ModelDoc2)((IModel)model).RefToComponent)).GetConfigurationNames();
+
+            List<string> configurationsList = new List<string>(configurationsArray);
+            return configurationsList;
         }
 
 
