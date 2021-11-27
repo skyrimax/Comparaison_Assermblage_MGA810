@@ -114,7 +114,7 @@ namespace Comparaison_Assemblage_MGA810
                 return _refToSoftware.GetNbComponents(this);
             }
 
-            public List<Model> GetConfigurations()
+            public List<Object> GetConfigurations()
             {
                 if (!_isAssembly)
                 {
@@ -276,12 +276,12 @@ namespace Comparaison_Assemblage_MGA810
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
 
-        protected abstract System.DateTime GetSaveDateTime();
+        protected abstract System.DateTime GetSaveDateTime(Model model);
 
         protected abstract List<Model> GetComponents(Model model);
         protected abstract int GetNbComponents(Model model);
 
-        protected abstract List<Model> GetConfigurations(Model model);
+        protected abstract List<Object> GetConfigurations(Model model);
 
         protected abstract string GetMaterial(Model model);
         protected abstract double GetMass(Model model);
