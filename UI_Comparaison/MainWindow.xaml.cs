@@ -285,6 +285,8 @@ namespace UI_Comparaison
 
                     Assembly2 = new Assembly(DriverAssembly2.OpenFile(Assembly_2_Directory));
 
+                    AssemblyReadResults += _assembly2.ToString();
+
                     IsAssemblyDirectory2Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
 

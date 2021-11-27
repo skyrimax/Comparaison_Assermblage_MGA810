@@ -15,20 +15,28 @@ namespace Comparaison_Assemblage_MGA810
 
 
         // PAS de set;
-        public string PartName { get; set; }
+        public string PartName { get; }
 
-        public double Mass { get; set; }
+        public double Mass { get;  }
 
-        public string Color { get; set; }
-        public string Material { get; set; }
+        public string Color { get;  }
+        public string Material { get;  }
 
-        public double Volume { get; set; }
+        public double Volume { get;  }
 
         public Part(Model Model)
         {
+            // 
             PartName = String.Empty;
             Volume = Model.GetVolume();
+            Material = Model.GetMaterial();
         }
 
+
+        private string GetPartName(Model Model)
+        {
+           
+            return null;
+        }
     }
 }

@@ -10,18 +10,15 @@ namespace Comparaison_Assemblage_MGA810.Models
     public class Assembly
     {
 
-        private int _numberOfComponents { get; set; }
-        public List<Part> _partList { get; set; }
+        private int _numberOfComponents { get; }
+        public List<Part> _partList { get; }
 
-        public List<string> ConfigurationList { get; set; }
-        private List<Model> _modelList { get; set; }
+        private List<Model> _modelList { get;  }
 
         public Assembly(Model Assembly)
         {
             _numberOfComponents = Assembly.GetNbComponents();
             _modelList = Assembly.GetComponents();
-
-            ConfigurationList = Assembly.GetConfigurations();
 
             _partList = new List<Part>();
 
@@ -35,9 +32,12 @@ namespace Comparaison_Assemblage_MGA810.Models
         {
             string assemblyResults = string.Empty;
 
-            int padding = 50;
+            int padding = 55;
 
-            string header = "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) + "\n" + "------------------------------------------------------------------------------------------------------------------------"+ "\n";
+            string header = "------------------------------------------------------------------------------------------------------------------------" +
+                 "\n" + "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) + "|" + "      Matériau".PadRight(padding)
+                + "\n" + "------------------------------------------------------------------------------------------------------------------------"
+                + "\n";
 
 
 
@@ -51,15 +51,15 @@ namespace Comparaison_Assemblage_MGA810.Models
                 assemblyResults += " | ";
            
 
-                assemblyResults += p.Mass.ToString().PadRight(padding - p.Mass.ToString().Length);
+                assemblyResults += p.Mass.ToString().PadRight(padding  - p.Mass.ToString().Length);
                 assemblyResults += " | ";
 
 
                 assemblyResults += p.Volume.ToString().PadRight(padding - p.Volume.ToString().Length);
-                assemblyResults.PadRight(25);
                 assemblyResults += " | ";
 
-                assemblyResults += p.Color + "\n";
+                //assemblyResults += p.Color.PadRight(padding - p.Volume.ToString().Length);
+                assemblyResults += p.Material + "\n";
 
             }
 
