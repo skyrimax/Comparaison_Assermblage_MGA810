@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_Comparaison"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="Démonstration MGA810 | Comparateur d'assemblages" Height="600" Width="900">
     <Grid>
         <TabControl>
 
@@ -105,8 +105,8 @@
                                 <TextBlock>Configurations :</TextBlock>
                                 <ComboBox Margin="10 0 0 0"></ComboBox>
                             </StackPanel>
-                            <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center"></Button>
-                            <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"></Button>
+                            <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center" MaxHeight="20"></Button>
+                            <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"  MaxHeight="20"></Button>
                           
                                     <Grid Grid.Row="5" Background="AliceBlue">
                                         <Grid.RowDefinitions>

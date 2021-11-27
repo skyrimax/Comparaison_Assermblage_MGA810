@@ -32,9 +32,10 @@ namespace Comparaison_Assemblage_MGA810.Models
         {
             string assemblyResults = string.Empty;
 
-            int padding = 50;
+            int padding = 55;
 
-            string header = "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) 
+            string header = "------------------------------------------------------------------------------------------------------------------------" +
+                 "\n" + "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) + "|" + "      Matériau".PadRight(padding)
                 + "\n" + "------------------------------------------------------------------------------------------------------------------------"
                 + "\n";
 
@@ -50,15 +51,15 @@ namespace Comparaison_Assemblage_MGA810.Models
                 assemblyResults += " | ";
            
 
-                assemblyResults += p.Mass.ToString().PadRight(padding - p.Mass.ToString().Length);
+                assemblyResults += p.Mass.ToString().PadRight(padding  - p.Mass.ToString().Length);
                 assemblyResults += " | ";
 
 
                 assemblyResults += p.Volume.ToString().PadRight(padding - p.Volume.ToString().Length);
-                assemblyResults.PadRight(25);
                 assemblyResults += " | ";
 
-                assemblyResults += p.Color + "\n";
+                //assemblyResults += p.Color.PadRight(padding - p.Volume.ToString().Length);
+                assemblyResults += p.Material + "\n";
 
             }
 

@@ -138,7 +138,7 @@ namespace Comparaison_Assemblage_MGA810
         {
 
 
-            return ((SldWorks.Component2)((IModel)model).RefToComponent).GetMaterialIdName();
+            return (((SldWorks.PartDoc)((IModel)model).RefToComponent).MaterialIdName);
         }
 
         protected override double GetMass(Model model)

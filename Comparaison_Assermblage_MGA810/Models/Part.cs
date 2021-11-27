@@ -26,9 +26,17 @@ namespace Comparaison_Assemblage_MGA810
 
         public Part(Model Model)
         {
+            // 
             PartName = String.Empty;
             Volume = Model.GetVolume();
+            Material = Model.GetMaterial();
         }
 
+
+        private string GetPartName(Model Model)
+        {
+           
+            return null;
+        }
     }
 }
