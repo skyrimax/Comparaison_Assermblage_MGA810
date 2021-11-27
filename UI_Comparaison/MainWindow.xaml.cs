@@ -56,6 +56,22 @@ namespace UI_Comparaison
 
         }
 
+        private List<string> _configurations2;
+
+        public List<string> Configurations2
+        {
+            get
+            {
+                return _configurations2;
+            }
+            set
+            {
+                _configurations2 = value;
+                OnPropertyChanged(nameof(Configurations2));
+            }
+
+        }
+
 
         private CAD_Software DriverAssembly1;
         private CAD_Software DriverAssembly2;
@@ -287,6 +303,8 @@ namespace UI_Comparaison
 
                     AssemblyReadResults += _assembly2.ToString();
 
+                    Configurations2 = Assembly2.ConfigurationList;
+
                     IsAssemblyDirectory2Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
 
@@ -318,11 +336,15 @@ namespace UI_Comparaison
 
             Assembly_1_Directory = null;
             IsAssemblyDirectory1Found = false;
+            Configurations1 = null;
             OnPropertyChanged("IsAssemblyDirectory1Found");
 
             Assembly_2_Directory = null;
             IsAssemblyDirectory2Found = false;
+            Configurations2 = null;
             OnPropertyChanged("IsAssemblyDirectory2Found");
+
+            AssemblyReadResults = null;
         }
 
 

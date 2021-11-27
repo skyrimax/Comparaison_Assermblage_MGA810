@@ -103,7 +103,7 @@
                             </TextBox>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <TextBlock>Configurations :</TextBlock>
-                                <ComboBox Margin="10 0 0 0"></ComboBox>
+                                <ComboBox Margin="10 0 0 0" ItemsSource="{Binding Configurations2}"></ComboBox>
                             </StackPanel>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_1_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="0" Content="..." VerticalContentAlignment="Center" MaxHeight="20"></Button>
                             <Button Command="{Binding GetAssemblyDirectoryCommand}"  CommandParameter="Assembly_2_Directory" Width="20" Margin="2 2 2 2" Grid.Column="1" Grid.Row="2" Content="..." VerticalContentAlignment="Center"  MaxHeight="20"></Button>

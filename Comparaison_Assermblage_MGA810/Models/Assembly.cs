@@ -11,7 +11,9 @@ namespace Comparaison_Assemblage_MGA810.Models
     {
 
         private int _numberOfComponents { get; }
-        public List<Part> _partList { get; }
+        public List<Part> PartList { get; }
+
+        public List<string> ConfigurationList { get; }
 
         private List<Model> _modelList { get;  }
 
@@ -20,11 +22,13 @@ namespace Comparaison_Assemblage_MGA810.Models
             _numberOfComponents = Assembly.GetNbComponents();
             _modelList = Assembly.GetComponents();
 
-            _partList = new List<Part>();
+            ConfigurationList = Assembly.GetConfigurations();
+
+            PartList = new List<Part>();
 
             foreach (Model m in _modelList)
             {
-                _partList.Add(new Part(m));
+                PartList.Add(new Part(m));
             }
         }
 
@@ -41,7 +45,7 @@ namespace Comparaison_Assemblage_MGA810.Models
 
 
 
-            foreach (Part p in _partList)
+            foreach (Part p in PartList)
             {
 
                 
