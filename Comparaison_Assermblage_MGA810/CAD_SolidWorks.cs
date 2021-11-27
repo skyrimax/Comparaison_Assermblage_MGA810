@@ -81,7 +81,7 @@ namespace Comparaison_Assemblage_MGA810
         protected override System.DateTime GetSaveDateTime(Model model)
         {
 
-            var SolidworksSaveTime = ((ModelDoc2)((SldWorks.PartDoc)((IModel)model))).get_SummaryInfo((int)swSummInfoField_e.swSumInfoSaveDate);
+            var SolidworksSaveTime = ((SldWorks.ModelDoc2)(((IModel)model).RefToComponent)).get_SummaryInfo((int)swSummInfoField_e.swSumInfoSaveDate);
             var AssemblySaveTime = DateTime.Parse(SolidworksSaveTime);
 
             return AssemblySaveTime;
@@ -143,7 +143,7 @@ namespace Comparaison_Assemblage_MGA810
         {
             Object[] Configurations;
 
-            Configurations = ((ModelDoc2)((SldWorks.PartDoc)((IModel)model))).GetConfigurationNames();
+            Configurations = ((ModelDoc2)((SldWorks.PartDoc)((IModel)model).RefToComponent)).GetConfigurationNames();
 
             return Configurations.ToList<Object>();
 
