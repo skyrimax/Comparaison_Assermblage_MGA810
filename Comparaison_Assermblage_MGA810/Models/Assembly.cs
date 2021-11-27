@@ -10,7 +10,7 @@ namespace Comparaison_Assemblage_MGA810.Models
     public class Assembly
     {
         public DateTime SaveDate { get; set; }
-        private int _numberOfComponents { get; }
+        public int NumberOfComponents { get; }
         public List<Part> PartList { get; }
 
         public List<string> ConfigurationList { get; }
@@ -19,7 +19,7 @@ namespace Comparaison_Assemblage_MGA810.Models
 
         public Assembly(Model Assembly)
         {
-            _numberOfComponents = Assembly.GetNbComponents();
+            NumberOfComponents = Assembly.GetNbComponents();
             _modelList = Assembly.GetComponents();
        
 

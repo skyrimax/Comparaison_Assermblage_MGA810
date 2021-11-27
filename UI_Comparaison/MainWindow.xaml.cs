@@ -152,6 +152,41 @@ namespace UI_Comparaison
         public bool IsAssemblyDirectory2Found { get; set; }
 
 
+        public bool DefaultState { get; set; }
+
+        private bool _sameSavedDate;
+        public bool SameSavedDate
+        {
+            get
+            {
+                return _sameSavedDate;
+            }
+            set
+            {
+                _sameSavedDate = value;
+                OnPropertyChanged(nameof(SameSavedDate));
+            }
+
+        }
+
+
+
+        private bool _sameNumberOfComponents;
+        public bool SameNumberOfComponents
+        {
+            get
+            {
+                return _sameNumberOfComponents;
+            }
+            set
+            {
+                _sameNumberOfComponents = value;
+                OnPropertyChanged(nameof(SameNumberOfComponents));
+            }
+
+        }
+
+
         public string _assemblyReadResults;
 
 
@@ -347,6 +382,49 @@ namespace UI_Comparaison
             OnPropertyChanged("IsAssemblyDirectory2Found");
 
             AssemblyReadResults = null;
+            DefaultState = true;
+        }
+
+
+        private RelayCommand _quickComparisonCommand;
+        public ICommand QuickComparisonCommand
+        {
+            get
+            {
+                if (_quickComparisonCommand == null)
+                {
+                    _quickComparisonCommand = new RelayCommand(param => this.QuickComparison(param), param => Assembly1 != null && Assembly2 != null
+                        );
+                }
+                return _quickComparisonCommand;
+            }
+        }
+
+        public void QuickComparison(object parameter)
+        {
+            DefaultState = false;
+
+            if (Assembly1.SaveDate == Assembly2.SaveDate)
+            {
+                SameSavedDate = true;
+
+            }
+            else
+            {
+                SameSavedDate = false;
+            }
+
+            if (Assembly1.NumberOfComponents == Assembly2.NumberOfComponents)
+            {
+                SameNumberOfComponents = true;
+            }
+            else
+            {
+                SameNumberOfComponents = false;
+            }
+
+
+
         }
 
 
@@ -368,6 +446,7 @@ namespace UI_Comparaison
         {
             InitializeComponent();
             DataContext = this;
+            DefaultState = true;
         }
 
         // Ouvrir et créer CAD_Solidworks 

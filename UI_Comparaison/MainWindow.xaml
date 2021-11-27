@@ -127,7 +127,7 @@
                                 <Button MaxHeight="30"  Command="{Binding OpenAssembly1Command}"  CommandParameter="Assembly_1_Directory" Grid.Row="0" Grid.Column="0" Margin="2 2 2 2">Ouvrir Assemblage 1</Button>
                                 <Button MaxHeight="30"  Grid.Row="0" Grid.Column="1" Command="{Binding OpenAssembly2Command}"  CommandParameter="Assembly_2_Directory" Margin="2 2 2 2">Ouvrir Assemblage 2</Button>
                                 <Button MaxHeight="30" Command="{Binding DeleteAssemblyDirectoryCommand}"   Grid.Row="0" Grid.Column="2" Margin="2 2 2 2">Supprimer</Button>
-                                <Button MaxHeight="30"  Grid.Row="0" Grid.Column="3" Margin="2 2 2 2">Vérif. préliminaire</Button>
+                                <Button MaxHeight="30" Command="{Binding QuickComparisonCommand}"  Grid.Row="0" Grid.Column="3" Margin="2 2 2 2">Vérif. préliminaire</Button>
                             </Grid>
                           
                             </Grid>
@@ -200,9 +200,80 @@
                     <GroupBox Header="Vérification préliminaire" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="6">
                         <StackPanel>
                             <TextBlock Text="Comparaison du moment (horodaté) de sauvegarde et du nombre de pièces provenant des métadonnées de l'assemblage."></TextBlock>
+
+                            <Label Content="Moment de sauvegarde">
+                                <Label.Style>
+
+                                    <Style TargetType="Label">
                             
-                            <Label Content="Moment de sauvegarde" Background="Green"></Label>
-                            <Label Content="Nombre de pièces" Background="Green"></Label>
+                                        <Style.Triggers>
+
+
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding SameSavedDate, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                                    <Condition Binding="{Binding DefaultState, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
+                                                <MultiDataTrigger.Setters>
+                                                    <Setter Property="Foreground" Value="White" />
+                                                    <Setter Property="Background" Value="Red" />
+                                                </MultiDataTrigger.Setters>
+
+                                            </MultiDataTrigger>
+                                            
+                                            <MultiDataTrigger>
+
+                                            <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding SameSavedDate, UpdateSourceTrigger=PropertyChanged}" Value="True" />
+                                                    <Condition Binding="{Binding DefaultState}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                                <MultiDataTrigger.Setters>
+                                                    <Setter Property="Foreground" Value="White" />
+                                                    <Setter Property="Background" Value="Green" />
+                                                </MultiDataTrigger.Setters>
+                                            </MultiDataTrigger>
+                                   
+
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </Label.Style>
+
+                            </Label>
+                            <Label Content="Nombre de pièces" >
+                                <Label.Style>
+
+                                    <Style TargetType="Label">
+                         
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding SameNumberOfComponents, UpdateSourceTrigger=PropertyChanged}" Value="True" />
+                                                    <Condition Binding="{Binding DefaultState}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
+
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="Background" Value="Green" />
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding SameNumberOfComponents, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                                    <Condition Binding="{Binding DefaultState}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
+
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="Background" Value="Red" />
+                                            </MultiDataTrigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </Label.Style>
+
+
+                            </Label>
                       
                             <!--<DataGrid>
                                 <DataGrid.Columns>
@@ -215,7 +286,7 @@
                     </GroupBox>
                     <GroupBox Header="Comparaison détaillée" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="6" Margin="0 20 0 0">
                         <StackPanel>
-                            <Button>Lancer la comparaison</Button>
+                            <Button Margin="10 10 10 10">Lancer la comparaison</Button>
                             <!--<DataGrid>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Critère"></DataGridTextColumn>
