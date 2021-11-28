@@ -136,10 +136,15 @@ namespace Comparaison_Assemblage_MGA810
             return ((SldWorks.AssemblyDoc)((IModel)model).RefToComponent).GetComponentCount(false);
         }
 
-
-        protected override List<Model> GetConfigurations(Model model)
+        protected override string GetActiveConfiguration(Model model)
         {
-            return new List<Model>();
+            return ""; //JULIEN TON CODE VA ICI ET NUL PART AILLEUR
+        }
+
+
+        protected override List<string> GetConfigurations(Model model)
+        {
+            return new List<string>();
         }
 
 
