@@ -72,6 +72,27 @@ namespace Comparaison_Assemblage_MGA810
                 set { _refToSoftware = value; }
             }
 
+            public string GetFullPath()
+            {
+                return _pathToFile;
+            }
+
+            public string GetFileNameWExt()
+            {
+                return System.IO.Path.GetFileName(_pathToFile);
+            }
+
+            public string GetFileNameWOExt()
+            {
+                return System.IO.Path.GetFileNameWithoutExtension(_pathToFile);
+            }
+
+            public System.DateTime GetSaveDateTime()
+            {
+                return _refToSoftware.GetSaveDateTime(this);
+            }
+
+
             public List<Model> GetComponents()
             {
                 if (!_isAssembly)
@@ -254,6 +275,8 @@ namespace Comparaison_Assemblage_MGA810
 
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
+
+        protected abstract System.DateTime GetSaveDateTime();
 
         protected abstract List<Model> GetComponents(Model model);
         protected abstract int GetNbComponents(Model model);
