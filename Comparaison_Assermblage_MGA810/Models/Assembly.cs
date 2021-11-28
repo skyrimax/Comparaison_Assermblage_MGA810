@@ -9,18 +9,17 @@ namespace Comparaison_Assemblage_MGA810.Models
 {
     public class Assembly
     {
-        public DateTime SaveDate { get; set; }
+        public string AssemblyPath { get; }
+        public DateTime SaveDate { get; }
         public int NumberOfComponents { get; }
         public List<Part> PartList { get; }
 
         public List<string> ConfigurationList { get; }
 
-        private List<Model> _modelList { get;  }
-
         public Assembly(Model Assembly)
         {
             NumberOfComponents = Assembly.GetNbComponents();
-            _modelList = Assembly.GetComponents();
+            List<Model> modelList = Assembly.GetComponents();
        
 
             SaveDate = Assembly.GetSaveDateTime();
@@ -29,7 +28,7 @@ namespace Comparaison_Assemblage_MGA810.Models
 
             PartList = new List<Part>();
 
-            foreach (Model m in _modelList)
+            foreach (Model m in modelList)
             {
                 PartList.Add(new Part(m));
             }

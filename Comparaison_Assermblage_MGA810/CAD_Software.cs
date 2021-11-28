@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
-using SldWorks;
-using SwConst;
 
 namespace Comparaison_Assemblage_MGA810
 {
@@ -116,11 +114,6 @@ namespace Comparaison_Assemblage_MGA810
 
             public List<string> GetConfigurations()
             {
-                if (!_isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an assembly", _pathToFile);
-                }
-
                 return _refToSoftware.GetConfigurations(this);
             }
 
@@ -287,11 +280,10 @@ namespace Comparaison_Assemblage_MGA810
         public abstract Model OpenFile(string path);
         public abstract void CloseModel(Model model);
 
-        protected abstract System.DateTime GetSaveDateTime();
+        protected abstract System.DateTime GetSaveDateTime(Model model);
 
         protected abstract List<Model> GetComponents(Model model);
 
-        protected abstract string GetPartName(Model model);
         protected abstract int GetNbComponents(Model model);
 
         protected abstract List<string> GetConfigurations(Model model);

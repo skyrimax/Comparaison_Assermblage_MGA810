@@ -15,7 +15,7 @@ namespace Comparaison_Assemblage_MGA810
 
 
         // PAS de set;
-        public string PartName { get; }
+        public string PartPath { get; }
 
         public double Mass { get;  }
 
@@ -42,7 +42,7 @@ namespace Comparaison_Assemblage_MGA810
 
         public Part(Model Model)
         {
-            PartName = Model.GetPartName();
+            PartPath = Model.GetFullPath();
             Volume = Model.GetVolume();
             Material = Model.GetMaterial();
             Mass = Model.GetMass();
@@ -56,9 +56,6 @@ namespace Comparaison_Assemblage_MGA810
             Inertia = Model.GetInertia();
             InertiaTensorAtCM = Model.GetInertiaTensorAtCM();
             InertiaTensorAtFOR = Model.GetInertiaTensorAtFOR();
-    }
-
-
-
+        }
     }
 }

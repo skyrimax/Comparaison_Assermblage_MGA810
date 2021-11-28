@@ -14,13 +14,15 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
             _elementsToCompare = new ElementsToCompare();
         }
 
-        public AssemblyComparator(bool compareNbParts, bool compareMaterial, bool compareMass,
+        public AssemblyComparator(bool compareFilePath, bool compareSameDateTime,
+                                    bool compareNbParts, bool compareMaterial, bool compareMass,
                                     bool compareVolume, bool compareSurfaceArea, bool compareNbFaces,
                                     bool compareNbEdges, bool compareColors, bool compareCenterOfMass,
                                     bool comparePrincipalAxes, bool compareInertia, bool compareInertiaTersorAtCM,
                                     bool compareInertiaTensorAtFOR, bool compareConstraints, bool compareCustomProperties)
         {
-            _elementsToCompare = new ElementsToCompare(compareNbParts, compareMaterial, compareMass,
+            _elementsToCompare = new ElementsToCompare(compareFilePath, compareSameDateTime,
+                                                        compareNbParts, compareMaterial, compareMass,
                                                         compareVolume, compareSurfaceArea, compareNbFaces,
                                                         compareNbEdges, compareColors, compareCenterOfMass,
                                                         comparePrincipalAxes, compareInertia, compareInertiaTersorAtCM,
@@ -44,12 +46,15 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
 
             }
 
-            public ElementsToCompare(bool compareNbParts, bool compareMaterial, bool compareMass,
+            public ElementsToCompare(bool compareFilePath, bool compareSaveDateTime,
+                                        bool compareNbParts, bool compareMaterial, bool compareMass,
                                         bool compareVolume, bool compareSurfaceArea, bool compareNbFaces,
                                         bool compareNbEdges, bool compareColors, bool compareCenterOfMass,
                                         bool comparePrincipalAxes, bool compareInertia, bool compareInertiaTersorAtCM,
                                         bool compareInertiaTensorAtFOR, bool compareConstraints, bool compareCustomProperties)
             {
+                CompareFilePath = compareFilePath;
+                CompareSaveDateTime = compareSaveDateTime;
                 CompareNbParts = compareNbParts;
                 CompareMaterial = compareMaterial;
                 CompareMass = compareMass;
@@ -69,6 +74,8 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
 
             public ElementsToCompare(ElementsToCompare elementsToCompare)
             {
+                CompareFilePath = elementsToCompare.CompareFilePath;
+                CompareSaveDateTime = elementsToCompare.CompareSaveDateTime;
                 CompareNbParts = elementsToCompare.CompareNbParts;
                 CompareMaterial = elementsToCompare.CompareMaterial;
                 CompareMass = elementsToCompare.CompareMass;
@@ -85,6 +92,10 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
                 CompareConstraints = elementsToCompare.CompareConstraints;
                 CompareCustomProperties = elementsToCompare.CompareCustomProperties;
             }
+
+            public bool CompareFilePath { get; set; }
+
+            public bool CompareSaveDateTime { get; set; }
 
             public bool CompareNbParts { get; set; }
 
@@ -121,7 +132,11 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
         {
             bool isSame = true;
 
+            if (_elementsToCompare.CompareFilePath &&
+                assembly1.)
+            {
 
+            }
 
             return isSame;
         }
@@ -133,7 +148,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
 
         private List<List<int>> GetRepeatedParts(Assembly assembly)
         {
-            int nbParts = assembly._partList.Count;
+            int nbParts = assembly.PartList.Count;
             List<List<int>> repeatedParts = new List<List<int>>(nbParts);
 
             List<bool> partAssigned = new List<bool>(nbParts);
@@ -154,7 +169,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
                         if (!partAssigned[j])
                         {
                             // If 2 parts are judged to be the same
-                            if(CompareParts(assembly._partList[i], assembly._partList[j]) > _threshold)
+                            if(CompareParts(assembly.PartList[i], assembly.PartList[j]) > _threshold)
                             {
                                 // Assign the same list to the 2nd part as the first for quick access later
                                 repeatedParts[j] = repeatedParts[i];
@@ -175,8 +190,8 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
 
         private int[,] ComparePartsInAsembly(Assembly assembly1, Assembly assembly2)
         {
-            int nbElementsAss1 = assembly1._partList.Count;
-            int nbElementsAss2 = assembly2._partList.Count;
+            int nbElementsAss1 = assembly1.PartList.Count;
+            int nbElementsAss2 = assembly2.PartList.Count;
 
             int[,] results = new int[nbElementsAss1, nbElementsAss2];
 
@@ -184,7 +199,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
             {
                 for(int j = 0; j < nbElementsAss2; ++j)
                 {
-                    results[i, j] = CompareParts(assembly1._partList[i], assembly2._partList[i]);
+                    results[i, j] = CompareParts(assembly1.PartList[i], assembly2.PartList[i]);
                 }
             }
 
