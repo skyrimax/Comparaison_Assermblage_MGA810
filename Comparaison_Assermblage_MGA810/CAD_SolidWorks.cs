@@ -107,7 +107,7 @@ namespace Comparaison_Assemblage_MGA810
                 extension = System.IO.Path.GetExtension(path);
                 if(!(extension == ".SLDPRT" || extension == ".PRT") || swComponent.IsSuppressed())
                 {
-                    break;
+                    continue;
                 }
 
                 component = new Model();
@@ -134,10 +134,19 @@ namespace Comparaison_Assemblage_MGA810
             return ((SldWorks.AssemblyDoc)((IModel)model).RefToComponent).GetComponentCount(false);
         }
 
-
-        protected override List<Model> GetConfigurations(Model model)
+        protected override DateTime GetSaveDateTime(Model model)
         {
-            return new List<Model>();
+            var SolidworksSaveTime = ((SldWorks.ModelDoc2)(((IModel)model).RefToComponent)).get_SummaryInfo((int)swSummInfoField_e.swSumInfoSaveDate);
+            var AssemblySaveTime = DateTime.Parse(SolidworksSaveTime);
+            return AssemblySaveTime;
+        }
+
+        protected override List<string> GetConfigurations(Model model)
+        {
+            string[] configurationsArray = (string[])(((SldWorks.ModelDoc2)((IModel)model).RefToComponent)).GetConfigurationNames();
+
+            List<string> configurationsList = new List<string>(configurationsArray);
+            return configurationsList;
         }
 
 
@@ -145,7 +154,7 @@ namespace Comparaison_Assemblage_MGA810
         {
 
 
-            return ((SldWorks.Component2)((IModel)model).RefToComponent).GetMaterialIdName();
+            return (((SldWorks.PartDoc)((IModel)model).RefToComponent).MaterialIdName);
         }
 
         protected override double GetMass(Model model)
@@ -197,6 +206,16 @@ namespace Comparaison_Assemblage_MGA810
             return "";
         }
 
+        protected override string GetPartName(Model model)
+        {
+            string path = ((IModel)model).Path;
+
+            string name = path.Split('\\').Last();
+
+
+
+            return name;
+        }
 
         protected override System.Numerics.Vector3 GetCenterOfMass(Model model)
         {

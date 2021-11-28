@@ -38,7 +38,40 @@ namespace UI_Comparaison
 
         //public string Assembly_1_Directory { get; set; }
 
-        public List<string> Configurations { get; set; }
+      
+
+        private List<string> _configurations1;
+
+        public List<string> Configurations1
+        {
+            get
+            {
+                return _configurations1;
+            }
+            set
+            {
+                _configurations1 = value;
+                OnPropertyChanged(nameof(Configurations1));
+            }
+
+        }
+
+        private List<string> _configurations2;
+
+        public List<string> Configurations2
+        {
+            get
+            {
+                return _configurations2;
+            }
+            set
+            {
+                _configurations2 = value;
+                OnPropertyChanged(nameof(Configurations2));
+            }
+
+        }
+
 
         private CAD_Software DriverAssembly1;
         private CAD_Software DriverAssembly2;
@@ -117,6 +150,41 @@ namespace UI_Comparaison
         public bool IsAssemblyDirectory1Found { get; set; }
 
         public bool IsAssemblyDirectory2Found { get; set; }
+
+
+        public bool DefaultState { get; set; }
+
+        private bool _sameSavedDate;
+        public bool SameSavedDate
+        {
+            get
+            {
+                return _sameSavedDate;
+            }
+            set
+            {
+                _sameSavedDate = value;
+                OnPropertyChanged(nameof(SameSavedDate));
+            }
+
+        }
+
+
+
+        private bool _sameNumberOfComponents;
+        public bool SameNumberOfComponents
+        {
+            get
+            {
+                return _sameNumberOfComponents;
+            }
+            set
+            {
+                _sameNumberOfComponents = value;
+                OnPropertyChanged(nameof(SameNumberOfComponents));
+            }
+
+        }
 
 
         public string _assemblyReadResults;
@@ -251,10 +319,16 @@ namespace UI_Comparaison
 
                     Assembly1 = new Assembly(DriverAssembly1.OpenFile(Assembly_1_Directory));
 
+
                     AssemblyReadResults += _assembly1.ToString();
 
                     IsAssemblyDirectory1Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory1Found));
+
+                    Configurations1 = Assembly1.ConfigurationList;
+                    // Configurations1.Add("Allô");
+                    //Configurations1.Add("Ça va");
+ 
 
                     break;
 
@@ -263,6 +337,10 @@ namespace UI_Comparaison
                     DriverAssembly2 = new CAD_SolidWorks();
 
                     Assembly2 = new Assembly(DriverAssembly2.OpenFile(Assembly_2_Directory));
+
+                    AssemblyReadResults += _assembly2.ToString();
+
+                    Configurations2 = Assembly2.ConfigurationList;
 
                     IsAssemblyDirectory2Found = true;
                     OnPropertyChanged(nameof(IsAssemblyDirectory2Found));
@@ -295,11 +373,58 @@ namespace UI_Comparaison
 
             Assembly_1_Directory = null;
             IsAssemblyDirectory1Found = false;
+            Configurations1 = null;
             OnPropertyChanged("IsAssemblyDirectory1Found");
 
             Assembly_2_Directory = null;
             IsAssemblyDirectory2Found = false;
+            Configurations2 = null;
             OnPropertyChanged("IsAssemblyDirectory2Found");
+
+            AssemblyReadResults = null;
+            DefaultState = true;
+        }
+
+
+        private RelayCommand _quickComparisonCommand;
+        public ICommand QuickComparisonCommand
+        {
+            get
+            {
+                if (_quickComparisonCommand == null)
+                {
+                    _quickComparisonCommand = new RelayCommand(param => this.QuickComparison(param), param => Assembly1 != null && Assembly2 != null
+                        );
+                }
+                return _quickComparisonCommand;
+            }
+        }
+
+        public void QuickComparison(object parameter)
+        {
+            DefaultState = false;
+
+            if (Assembly1.SaveDate == Assembly2.SaveDate)
+            {
+                SameSavedDate = true;
+
+            }
+            else
+            {
+                SameSavedDate = false;
+            }
+
+            if (Assembly1.NumberOfComponents == Assembly2.NumberOfComponents)
+            {
+                SameNumberOfComponents = true;
+            }
+            else
+            {
+                SameNumberOfComponents = false;
+            }
+
+
+
         }
 
 
@@ -321,6 +446,7 @@ namespace UI_Comparaison
         {
             InitializeComponent();
             DataContext = this;
+            DefaultState = true;
         }
 
         // Ouvrir et créer CAD_Solidworks 
