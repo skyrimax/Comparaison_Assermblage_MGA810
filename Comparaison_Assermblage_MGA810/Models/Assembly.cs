@@ -9,22 +9,28 @@ namespace Comparaison_Assemblage_MGA810.Models
 {
     public class Assembly
     {
+        public string AssemblyPath { get; }
+        public DateTime SaveDate { get; }
+        public int NumberOfComponents { get; }
+        public List<Part> PartList { get; }
 
-        private int _numberOfComponents { get; set; }
-        public List<Part> _partList { get; set; }
-
-        private List<Model> _modelList { get; set; }
+        public List<string> ConfigurationList { get; }
 
         public Assembly(Model Assembly)
         {
-            _numberOfComponents = Assembly.GetNbComponents(Assembly);
-            _modelList = Assembly.GetComponents(Assembly);
+            NumberOfComponents = Assembly.GetNbComponents();
+            List<Model> modelList = Assembly.GetComponents();
+       
 
-            _partList = new List<Part>();
+            SaveDate = Assembly.GetSaveDateTime();
 
-            foreach (Model m in _modelList)
+            ConfigurationList = Assembly.GetConfigurations();
+
+            PartList = new List<Part>();
+
+            foreach (Model m in modelList)
             {
-                _partList.Add(new Part(m));
+                PartList.Add(new Part(m));
             }
         }
 
@@ -32,31 +38,38 @@ namespace Comparaison_Assemblage_MGA810.Models
         {
             string assemblyResults = string.Empty;
 
-            int padding = 50;
+            int padding = 40;
 
-            string header = "      Nom de la pièce".PadRight(padding - 10) + "|" + "      Masse".PadRight(padding-1) + "|" + "      Volume".PadRight(padding-6) + "|" + "      Couleur".PadRight(padding) + "\n" + "------------------------------------------------------------------------------------------------------------------------"+ "\n";
+            string header = "\n" + "------------------------------------------------------------------------------------------------------------------------" +
+                 "\n" + "Nom de la pièce".PadRight(padding) + "|" + "Masse".PadRight(padding + 1) + "|" + "Volume".PadRight(padding) + "|" + "Couleur".PadRight(padding) + "|" + "Matériau".PadRight(padding)
+                + "\n" + "------------------------------------------------------------------------------------------------------------------------"
+                ;
 
 
-
-            foreach (Part p in _partList)
+            foreach (Part p in PartList)
             {
 
-                
 
-                char pad = '=';
-                assemblyResults += p.PartName.PadRight(padding - p.PartName.Length) + " | ";
-                assemblyResults += " | ";
-           
-
-                assemblyResults += p.Mass.ToString().PadRight(padding - p.Mass.ToString().Length);
-                assemblyResults += " | ";
+                assemblyResults += "\n" + String.Format("{0,-30}||{1,-30}|{2,-30}|{3,-30}|{4,-30}|", p.PartName, p.Mass.ToString(), p.Volume.ToString(), p.Color, p.Material);
+                //char pad = '=';
 
 
-                assemblyResults += p.Volume.ToString().PadRight(padding - p.Volume.ToString().Length);
-                assemblyResults.PadRight(25);
-                assemblyResults += " | ";
+                //assemblyResults += p.Mass.ToString().PadRight(padding );
+                //assemblyResults += " | ";
 
-                assemblyResults += p.Color + "\n";
+
+                //assemblyResults += p.Volume.ToString().PadRight(padding );
+                //assemblyResults += " | ";
+
+
+
+                ////assemblyResults += p.Color.PadRight(padding - p.Volume.ToString().Length);
+                //assemblyResults += p.Material.PadRight(padding );
+                //assemblyResults += " | ";
+
+                //assemblyResults += p.PartName.PadRight(padding ) + " | ";
+                //assemblyResults += " | " + "\n"; ;
+
 
             }
 

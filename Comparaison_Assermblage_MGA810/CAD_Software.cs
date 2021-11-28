@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
-using SldWorks;
-using SwConst;
 
 namespace Comparaison_Assemblage_MGA810
 {
@@ -114,13 +112,8 @@ namespace Comparaison_Assemblage_MGA810
                 return _refToSoftware.GetNbComponents(this);
             }
 
-            public List<Object> GetConfigurations()
+            public List<string> GetConfigurations()
             {
-                if (!_isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an assembly", _pathToFile);
-                }
-
                 return _refToSoftware.GetConfigurations(this);
             }
 
@@ -186,6 +179,17 @@ namespace Comparaison_Assemblage_MGA810
                 }
 
                 return _refToSoftware.GetColors(this);
+            }
+
+
+            public string GetPartName()
+            {
+                if (_isAssembly)
+                {
+                    throw new ArgumentException("Parameter is not an part", _pathToFile);
+                }
+
+                return _refToSoftware.GetPartName(this);
             }
 
             public System.Numerics.Vector3 GetCenterOfMass()
@@ -279,9 +283,10 @@ namespace Comparaison_Assemblage_MGA810
         protected abstract System.DateTime GetSaveDateTime(Model model);
 
         protected abstract List<Model> GetComponents(Model model);
+
         protected abstract int GetNbComponents(Model model);
 
-        protected abstract List<Object> GetConfigurations(Model model);
+        protected abstract List<Model> GetConfigurations(Model model);
 
         protected abstract string GetMaterial(Model model);
         protected abstract double GetMass(Model model);

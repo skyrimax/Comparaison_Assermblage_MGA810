@@ -80,10 +80,8 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override System.DateTime GetSaveDateTime(Model model)
         {
-
             var SolidworksSaveTime = ((SldWorks.ModelDoc2)(((IModel)model).RefToComponent)).get_SummaryInfo((int)swSummInfoField_e.swSumInfoSaveDate);
             var AssemblySaveTime = DateTime.Parse(SolidworksSaveTime);
-
             return AssemblySaveTime;
         }
 
@@ -111,7 +109,7 @@ namespace Comparaison_Assemblage_MGA810
                 extension = System.IO.Path.GetExtension(path);
                 if(!(extension == ".SLDPRT" || extension == ".PRT") || swComponent.IsSuppressed())
                 {
-                    break;
+                    continue;
                 }
 
                 component = new Model();
@@ -139,22 +137,20 @@ namespace Comparaison_Assemblage_MGA810
         }
 
 
-        protected override List<Object> GetConfigurations(Model model)
+        protected override List<Model> GetConfigurations(Model model)
         {
-            Object[] Configurations;
-
-            Configurations = ((ModelDoc2)((SldWorks.PartDoc)((IModel)model).RefToComponent)).GetConfigurationNames();
-
-            return Configurations.ToList<Object>();
-
+            return new List<Model>();
         }
 
 
         protected override string GetMaterial(Model model)
         {
+            if (((IModel)model).IsAssembly)
+            {
+                throw new ArgumentException("Parameter is not an assembly", nameof(model));
+            }
 
-
-            return ((SldWorks.Component2)((IModel)model).RefToComponent).GetMaterialIdName();
+            return (((SldWorks.PartDoc)((IModel)model).RefToComponent).MaterialIdName);
         }
 
         protected override double GetMass(Model model)
@@ -164,12 +160,21 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override double GetVolume(Model model)
         {
+            if (((IModel)model).IsAssembly)
+            {
+                throw new ArgumentException("Parameter is not an assembly", nameof(model));
+            }
 
             return ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetMassProperties(0)[3];
         }
 
         protected override double GetSurfaceArea(Model model)
         {
+            if (((IModel)model).IsAssembly)
+            {
+                throw new ArgumentException("Parameter is not an assembly", nameof(model));
+            }
+
             Object[] faces;
             Surface swSurface;
             double PartSurfaceArea = 0.0;
@@ -184,16 +189,18 @@ namespace Comparaison_Assemblage_MGA810
                     PartSurfaceArea += ((Face2)face).GetArea();
                 }
             }
+
             return PartSurfaceArea;
         }
 
         protected override int GetNbFaces(Model model)
         {
-            int Nbfaces;
-
-            Nbfaces = ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetFaceCount();
+            if (((IModel)model).IsAssembly)
+            {
+                throw new ArgumentException("Parameter is not an assembly", nameof(model));
+            }
            
-            return Nbfaces;
+            return ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetFaceCount();;
         }
 
         protected override int GetNbEdges(Model model)
