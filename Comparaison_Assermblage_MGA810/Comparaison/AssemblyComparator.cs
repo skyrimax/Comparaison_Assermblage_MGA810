@@ -126,6 +126,72 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
             return isSame;
         }
 
+        public int CompareParts(Part part1, Part part2)
+        {
+            return 0;
+        }
+
+        private List<List<int>> GetRepeatedParts(Assembly assembly)
+        {
+            int nbParts = assembly._partList.Count;
+            List<List<int>> repeatedParts = new List<List<int>>(nbParts);
+
+            List<bool> partAssigned = new List<bool>(nbParts);
+
+            // Loop needed to initialize both lists with values
+            for(int i = 0; i < nbParts; ++i)
+            {
+                repeatedParts[i] = new List<int>();
+                partAssigned[i] = new bool();
+            }
+
+            for(int i = 0; i < nbParts; ++i)
+            {
+                if (!partAssigned[i])
+                {
+                    for(int j = i+1; j < nbParts; ++j)
+                    {
+                        if (!partAssigned[j])
+                        {
+                            // If 2 parts are judged to be the same
+                            if(CompareParts(assembly._partList[i], assembly._partList[j]) > _threshold)
+                            {
+                                // Assign the same list to the 2nd part as the first for quick access later
+                                repeatedParts[j] = repeatedParts[i];
+
+                                // Add the 2nd part to the list
+                                repeatedParts[i].Add(j);
+
+                                // Add 2nd part to the list of assigned parts to prevent repetition later
+                                partAssigned[j] = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return repeatedParts;
+        }
+
+        private int[,] ComparePartsInAsembly(Assembly assembly1, Assembly assembly2)
+        {
+            int nbElementsAss1 = assembly1._partList.Count;
+            int nbElementsAss2 = assembly2._partList.Count;
+
+            int[,] results = new int[nbElementsAss1, nbElementsAss2];
+
+            for(int i = 0; i < nbElementsAss1; ++i)
+            {
+                for(int j = 0; j < nbElementsAss2; ++j)
+                {
+                    results[i, j] = CompareParts(assembly1._partList[i], assembly2._partList[i]);
+                }
+            }
+
+            return results;
+        }
+
         private ElementsToCompare _elementsToCompare;
+        private int _threshold = 95;
     }
 }
