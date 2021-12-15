@@ -22,15 +22,15 @@ namespace Comparaison_Assemblage_MGA810
             }
             catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
         public override Model OpenFile(string path)
         {
-            Model openedModel = default(Model);
-            SldWorks.DocumentSpecification documentSpecification = default(SldWorks.DocumentSpecification);
-            string extension = default(string);
+            Model openedModel;
+            SldWorks.DocumentSpecification documentSpecification;
+            string extension;
 
             if(!System.IO.File.Exists(path))
             {
@@ -88,9 +88,9 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override List<Model> GetComponents(Model model)
         {
-            string path = default(string);
-            string extension = default(string);
-            Model component = default(Model);
+            string path;
+            string extension;
+            Model component;
 
             if (!((IModel)model).IsAssembly)
             {
@@ -142,6 +142,11 @@ namespace Comparaison_Assemblage_MGA810
 
             List<string> configurationsList = new List<string>(configurationsArray);
             return configurationsList;
+        }
+
+        protected override string GetActiveConfiguration(Model model)
+        {
+            return "";
         }
 
 
@@ -253,6 +258,6 @@ namespace Comparaison_Assemblage_MGA810
             return new KeyValuePair<string, string>();
         }
 
-        private SldWorks.SldWorks swApp;
+        private readonly SldWorks.SldWorks swApp;
     }
 }

@@ -427,7 +427,26 @@ namespace UI_Comparaison
 
         }
 
+        private RelayCommand _launchComparison;
+        public ICommand LaunchComparison
+        {
+            get
+            {
+                if (_launchComparison == null)
+                {
+                    _launchComparison = new RelayCommand(param => this.Comparison(param), param => Assembly1 != null && Assembly2 != null
+                        );
+                }
+                return _launchComparison;
+            }
+        }
 
+        public void Comparison(object parameter)
+        {
+            DefaultState = false;
+
+            
+        }
         /// <summary>
         /// Implantation de la méthode de l'interface INotifyPropertyChanged
         /// </summary>

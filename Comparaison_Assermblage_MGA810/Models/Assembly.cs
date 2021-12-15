@@ -10,21 +10,24 @@ namespace Comparaison_Assemblage_MGA810.Models
     public class Assembly
     {
         public string AssemblyPath { get; }
+        public string ActiveConfig { get; }
         public DateTime SaveDate { get; }
         public int NumberOfComponents { get; }
         public List<Part> PartList { get; }
 
         public List<string> ConfigurationList { get; }
 
-        public Assembly(Model Assembly)
+        public Assembly(Model assembly)
         {
-            NumberOfComponents = Assembly.GetNbComponents();
-            List<Model> modelList = Assembly.GetComponents();
-       
+            NumberOfComponents = assembly.GetNbComponents();
+            List<Model> modelList = assembly.GetComponents();
 
-            SaveDate = Assembly.GetSaveDateTime();
+            AssemblyPath = assembly.GetFullPath();
+            ActiveConfig = assembly.GetActiveConfiguration();
 
-            ConfigurationList = Assembly.GetConfigurations();
+            SaveDate = assembly.GetSaveDateTime();
+
+            ConfigurationList = assembly.GetConfigurations();
 
             PartList = new List<Part>();
 

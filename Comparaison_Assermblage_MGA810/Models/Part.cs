@@ -15,14 +15,18 @@ namespace Comparaison_Assemblage_MGA810
 
 
         // PAS de set;
+        public string PartName { get; }
         public string PartPath { get; }
 
-        public double Mass { get;  }
+        public System.DateTime SaveDateTime { get; }
 
-        public string Color { get;  }
-        public string Material { get;  }
+        public string ActiveConfig { get; }
+        public double Mass { get; }
 
-        public double Volume { get;  }
+        public string Color { get; }
+        public string Material { get; }
+
+        public double Volume { get; }
 
         public double SurfaceArea { get; }
 
@@ -42,7 +46,10 @@ namespace Comparaison_Assemblage_MGA810
 
         public Part(Model Model)
         {
+            PartName = Model.GetFileNameWOExt();
             PartPath = Model.GetFullPath();
+            ActiveConfig = Model.GetActiveConfiguration();
+            SaveDateTime = Model.GetSaveDateTime();
             Volume = Model.GetVolume();
             Material = Model.GetMaterial();
             Mass = Model.GetMass();

@@ -117,6 +117,11 @@ namespace Comparaison_Assemblage_MGA810
                 return _refToSoftware.GetConfigurations(this);
             }
 
+            public string GetActiveConfiguration()
+            {
+                return _refToSoftware.GetActiveConfiguration(this);
+            }
+
             public string GetMaterial()
             {
                 if (_isAssembly)
@@ -179,17 +184,6 @@ namespace Comparaison_Assemblage_MGA810
                 }
 
                 return _refToSoftware.GetColors(this);
-            }
-
-
-            public string GetPartName()
-            {
-                if (_isAssembly)
-                {
-                    throw new ArgumentException("Parameter is not an part", _pathToFile);
-                }
-
-                return _refToSoftware.GetPartName(this);
             }
 
             public System.Numerics.Vector3 GetCenterOfMass()
@@ -287,6 +281,7 @@ namespace Comparaison_Assemblage_MGA810
         protected abstract int GetNbComponents(Model model);
 
         protected abstract List<string> GetConfigurations(Model model);
+        protected abstract string GetActiveConfiguration(Model model);
 
         protected abstract string GetMaterial(Model model);
         protected abstract double GetMass(Model model);
