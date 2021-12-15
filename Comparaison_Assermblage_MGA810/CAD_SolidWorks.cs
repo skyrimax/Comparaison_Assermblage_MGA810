@@ -138,13 +138,17 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override string GetActiveConfiguration(Model model)
         {
-            return ""; //JULIEN TON CODE VA ICI ET NUL PART AILLEUR
+            string ActiveConfiguration;
+            ActiveConfiguration = swApp.GetActiveConfigurationName(((IModel)model).Path);
+            return ActiveConfiguration; 
         }
 
 
         protected override List<string> GetConfigurations(Model model)
         {
-            return new List<string>();
+            string[] Configurations;
+            Configurations = ((ModelDoc2)((SldWorks.PartDoc)((IModel)model).RefToComponent)).GetConfigurationNames();
+            return Configurations.ToList<string>();
         }
 
 
@@ -160,7 +164,9 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override double GetMass(Model model)
         {
-            return 0.0;
+            MassProperty2 allMassInfo = CreateMassProperty2FromModel(model);
+            double modelMass = allMassInfo.Mass;
+            return modelMass;
         }
 
         protected override double GetVolume(Model model)
@@ -221,7 +227,13 @@ namespace Comparaison_Assemblage_MGA810
 
         protected override System.Numerics.Vector3 GetCenterOfMass(Model model)
         {
-            return new System.Numerics.Vector3();
+            System.Numerics.Vector3 CtrOfMass;
+
+            CtrOfMass.X = ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetMassProperties(0)[0];
+            CtrOfMass.Y = ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetMassProperties(0)[1];
+            CtrOfMass.Z = ((SldWorks.Body2)(((SldWorks.PartDoc)((IModel)model).RefToComponent).GetBodies2((int)swBodyType_e.swSolidBody, true)[0])).GetMassProperties(0)[2];
+
+            return CtrOfMass;
         }
 
         protected override System.Numerics.Matrix4x4 GetPrincipalAxes(Model model)
@@ -254,6 +266,13 @@ namespace Comparaison_Assemblage_MGA810
         protected override KeyValuePair<string, string> GetCustomProperties(Model model)
         {
             return new KeyValuePair<string, string>();
+        }
+
+        private MassProperty2 CreateMassProperty2FromModel(Model model)
+        {
+            ModelDocExtension massExtension = ((ModelDoc2)((SldWorks.PartDoc)((IModel)model).RefToComponent)).Extension;
+            MassProperty2 allMassInfo = (MassProperty2)MassExtension.CreateMassProperty2();
+            return allMassInfo;
         }
 
         private SldWorks.SldWorks swApp;
