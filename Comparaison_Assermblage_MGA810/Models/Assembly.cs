@@ -19,8 +19,8 @@ namespace Comparaison_Assemblage_MGA810.Models
 
         public Assembly(Model assembly)
         {
-            NumberOfComponents = assembly.GetNbComponents();
             List<Model> modelList = assembly.GetComponents();
+            NumberOfComponents = modelList.Count;
 
             AssemblyPath = assembly.GetFullPath();
             ActiveConfig = assembly.GetActiveConfiguration();

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Comparaison_Assemblage_MGA810.Models;
 
-namespace Comparaison_Assemblage_MGA810.Comparaison
+namespace Comparaison_Assemblage_MGA810
 {
-    class AssemblyComparator
+    public class AssemblyComparator
     {
         public AssemblyComparator()
         {
@@ -297,8 +297,9 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
             // Loop needed to initialize both lists with values
             for (int i = 0; i < nbParts; ++i)
             {
-                repeatedParts[i] = new List<int>();
-                partAssigned[i] = new bool();
+                repeatedParts.Add(new List<int>());
+                repeatedParts[i].Add(i);
+                partAssigned.Add(new bool());
             }
 
             for (int i = 0; i < nbParts; ++i)
@@ -340,7 +341,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
             {
                 for (int j = 0; j < nbElementsAss2; ++j)
                 {
-                    results[i, j] = CompareParts(assembly1.PartList[i], assembly2.PartList[i]);
+                    results[i, j] = CompareParts(assembly1.PartList[i], assembly2.PartList[j]);
                 }
             }
 
@@ -375,7 +376,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
             for (int i = 0; i < nbPieces; ++i)
             {
                 //making sure current row hasn't been previously assigned
-                if (associated[i])
+                if (!associated[i])
                 {
                     // Reset lists of lines for both rows (assembly 1) and columns (assembly 2)
                     matchesRows = new List<Line>();
@@ -470,7 +471,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
                         associations[matchesRows[j].Pos] = matchesColumns[j].Pos;
 
                         // Indicate that the row at the jth column match has been associated
-                        associated[matchesColumns[j].Pos] = true;
+                        associated[matchesRows[j].Pos] = true;
                     }
                 }
             }
@@ -634,7 +635,7 @@ namespace Comparaison_Assemblage_MGA810.Comparaison
                     _elementsToCompare.CompareSaveDateTime && sameSaveDateTime) ||
                     (samePath && _elementsToCompare.CompareActiveConfig &&
                     sameActiveConfig && !_elementsToCompare.CompareSaveDateTime) ||
-                    (sameActiveConfig && sameActiveConfig &&
+                    (samePath && sameActiveConfig &&
                     _elementsToCompare.CompareSaveDateTime && sameSaveDateTime);
         }
 

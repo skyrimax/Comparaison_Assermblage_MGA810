@@ -381,6 +381,11 @@ namespace UI_Comparaison
             Configurations2 = null;
             OnPropertyChanged("IsAssemblyDirectory2Found");
 
+            Assembly1 = null;
+            Assembly2 = null;
+
+            Comparaison_results = null;
+
             AssemblyReadResults = null;
             DefaultState = true;
         }
@@ -441,11 +446,30 @@ namespace UI_Comparaison
             }
         }
 
+        private string _comparaison_results;
+
+        public string Comparaison_results
+        {
+            get
+            {
+                return _comparaison_results;
+            }
+            set
+            {
+                this._comparaison_results = value;
+                OnPropertyChanged(nameof(this.Comparaison_results));
+            }
+
+        }
+
         public void Comparison(object parameter)
         {
             DefaultState = false;
 
-            
+            AssemblyComparator comparator = new AssemblyComparator(true, true, true, true, useMaterial.IsChecked ?? false, useMass.IsChecked ?? false, useVolume.IsChecked ?? false, useSurfaceArea.IsChecked ?? false,
+                                                                    true, false, false, useCenterOfMass.IsChecked ?? false, false, false, false);
+
+            Comparaison_results = "Les assemblages sont " + (comparator.CompareAssemblies(Assembly1, Assembly2, out int[] associations) ? "les mêmes" : "différents");
         }
         /// <summary>
         /// Implantation de la méthode de l'interface INotifyPropertyChanged

@@ -160,28 +160,28 @@
 
                             <TextBlock Grid.ColumnSpan="4" Text="Une série de boîtes cochables permettront de choisir ce qu'on veut comparer. Certaines options seront sélectionnées par défaut."></TextBlock>
                             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-                                <CheckBox></CheckBox>
+                                <CheckBox x:Name="useMaterial" IsChecked="{Binding IsChecked}"/>
                                 <TextBlock  Margin="10 0 0 0" Text="Matériaux"></TextBlock>
                             </StackPanel>
 
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                                <CheckBox></CheckBox>
+                                <CheckBox x:Name="useMass" IsChecked="{Binding IsChecked}"/>
                                 <TextBlock Margin="10 0 0 0" Text="Masse"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
-                                <CheckBox></CheckBox>
+                                <CheckBox x:Name="useVolume" IsChecked="{Binding IsChecked}"/>
                                 <TextBlock  Margin="10 0 0 0" Text="Volume"></TextBlock>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
-                                <CheckBox></CheckBox>
+                                <CheckBox x:Name="useSurfaceArea" IsChecked="{Binding IsChecked}"/>
                                 <TextBlock  Margin="10 0 0 0" Text="Aire de surface"></TextBlock>
                             </StackPanel>
 
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                                <CheckBox></CheckBox>
+                                <CheckBox x:Name="useCenterOfMass" IsChecked="{Binding IsChecked}"/>
                                 <TextBlock  Margin="10 0 0 0" Text="Centre de masse"></TextBlock>
                             </StackPanel>
                   
@@ -286,25 +286,7 @@
                     </GroupBox>
                     <GroupBox Header="Comparaison détaillée" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="6" Margin="0 20 0 0">
                         <StackPanel>
-                            <Button Content="Lancer Comparaison" Command="{Binding LaunchComparison}" Margin="10 10 10 10">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsAssemblyDirectory2Found}" Value="True">
-                                                <Setter Property="Foreground" Value="White" />
-                                                <Setter Property="Background" Value="Green" />
-                                            </DataTrigger>
-                                            
-                                            <DataTrigger Binding="{Binding IsAssemblyDirectory2Found}" Value="False">
-                                                <Setter Property="Foreground" Value="White" />
-                                                <Setter Property="Background" Value="Red" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                
-                            </Button>
+                            <Button Content="Lancer Comparaison" Command="{Binding LaunchComparison}" Margin="10 10 10 10"></Button>
                             <!--<DataGrid>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Critère"></DataGridTextColumn>
@@ -312,6 +294,7 @@
                                 </DataGrid.Columns>
                                 
                             </DataGrid>-->
+                            <TextBlock Margin="2,2,2,2.5" MaxHeight="20" Text="{Binding Comparaison_results, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40.4"></TextBlock>
                         </StackPanel>
                     </GroupBox>
 

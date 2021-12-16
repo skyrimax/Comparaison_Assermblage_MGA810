@@ -38,7 +38,7 @@ namespace Comparaison_Assemblage_MGA810
             }
 
             openedModel = new Model();
-            extension = System.IO.Path.GetExtension(path);
+            extension = System.IO.Path.GetExtension(path).ToUpper();
             documentSpecification = (SldWorks.DocumentSpecification)swApp.GetOpenDocSpec(path);
 
             switch (extension)
@@ -106,7 +106,7 @@ namespace Comparaison_Assemblage_MGA810
             foreach(SldWorks.Component2 swComponent in swComponents)
             {
                 path = swComponent.GetPathName();
-                extension = System.IO.Path.GetExtension(path);
+                extension = System.IO.Path.GetExtension(path).ToUpper();
                 if(!(extension == ".SLDPRT" || extension == ".PRT") || swComponent.IsSuppressed())
                 {
                     continue;
